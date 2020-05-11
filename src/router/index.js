@@ -12,6 +12,10 @@ import Layout from '@/layout'
 // import tableRouter from './modules/table'
 // import nestedRouter from './modules/nested'
 
+import toeflRouter from './modules/toefl'
+import ssatRouter from './modules/ssat'
+import satRouter from './modules/sat'
+
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -79,10 +83,13 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        meta: { title: '首页', icon: 'dashboard', affix: true }
       }
     ]
-  }
+  },
+  toeflRouter,
+  ssatRouter,
+  satRouter
 ]
 
 /**
