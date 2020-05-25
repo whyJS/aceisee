@@ -1,9 +1,9 @@
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
-      <keep-alive :include="cachedViews">
-        <router-view :key="key" />
-      </keep-alive>
+      <!-- <keep-alive :include="cachedViews"> -->
+      <router-view :key="key" />
+      <!-- </keep-alive> -->
     </transition>
   </section>
 </template>
@@ -25,33 +25,14 @@ export default {
 <style lang="scss" scoped>
 .app-main {
   /* 50= navbar  50  */
-  min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 60px);
   width: 100%;
+  max-width: 1200px;
   position: relative;
   overflow: hidden;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-top: 100px;
 }
 
-.fixed-header+.app-main {
-  padding-top: 50px;
-}
-
-.hasTagsView {
-  .app-main {
-    /* 84 = navbar + tags-view = 50 + 34 */
-    min-height: calc(100vh - 84px);
-  }
-
-  .fixed-header+.app-main {
-    padding-top: 84px;
-  }
-}
-</style>
-
-<style lang="scss">
-// fix css style bug in open el-dialog
-.el-popup-parent--hidden {
-  .fixed-header {
-    padding-right: 15px;
-  }
-}
 </style>
