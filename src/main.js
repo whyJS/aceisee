@@ -7,11 +7,11 @@ import "./permission"; // 权限
 import "./error"; // 日志
 import "./cache"; //页面缓存
 import store from "./store";
-import { loadStyle } from "./util/util";
+// import { loadStyle } from "./util/util";
 import * as urls from "@/config/env";
 import Element from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
-import { iconfontUrl, iconfontVersion } from "@/config/env";
+// import { iconfontUrl, iconfontVersion } from "@/config/env";
 import i18n from "./lang"; // Internationalization
 import "./styles/common.scss";
 import basicBlock from "./components/basic-block/main";
@@ -34,9 +34,9 @@ Object.keys(urls).forEach(key => {
 });
 
 // 动态加载阿里云字体库
-iconfontVersion.forEach(ele => {
-  loadStyle(iconfontUrl.replace("$key", ele));
-});
+// iconfontVersion.forEach(ele => {
+//   loadStyle(iconfontUrl.replace("$key", ele));
+// });
 
 Vue.config.productionTip = false;
 

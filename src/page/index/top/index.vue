@@ -6,7 +6,7 @@
         :class="[{ 'aceisee-breadcrumb--active': isCollapse }]"
         v-if="showCollapse"
       >
-        <i class="icon-navicon" @click="setCollapse"></i>
+        <i class="el-icon-s-unfold" @click="setCollapse"></i>
       </div>
     </div>
     <div class="top-bar__title">
@@ -16,7 +16,7 @@
       
     </div>
     <div class="top-bar__right">
-      <el-tooltip
+      <!-- <el-tooltip
         v-if="showColor"
         effect="dark"
         :content="$t('navbar.color')"
@@ -57,11 +57,12 @@
       >
         <div class="top-bar__item">
           <i
-            :class="isFullScren ? 'icon-tuichuquanping' : 'icon-quanping'"
+          style="font-size:20px;font-weight:blod"
+            :class="isFullScren ? 'el-icon-full-screen' : 'el-icon-full-screen'"
             @click="handleScreen"
           ></i>
         </div>
-      </el-tooltip>
+      </el-tooltip> -->
       <img
         class="top-bar__img"
         style="background:#409EFF;"

@@ -5,7 +5,7 @@ export default [
     path: "/wel",
     component: Layout,
     name: "zz",
-    source:"iconfont iconicon_work",
+    source:"el-icon-s-grid",
     redirect: "/wel/index",
     children: [
       {

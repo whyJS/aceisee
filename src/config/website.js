@@ -1,12 +1,12 @@
 /**
- * 全局配置文件
+ * 全局配置文件AW
  */
 export default {
-  title: "账户中心",
-  logo: "HX",
+  title: "ACEiSEE-WORD",
+  logo: "AW",
   sysType: "4", //渠道类型，目前用于获取该渠道菜单和权限
   key: "saber", //配置主键,目前用于存储
-  indexTitle: "中航信用 账户中心",
+  indexTitle: "ACEiSEE-WORD",
   clientId: "saber", // 客户端id
   clientSecret: "saber_secret", // 客户端密钥
   tenantMode: true, // 是否开启租户模式
@@ -24,8 +24,7 @@ export default {
     meta: {
       i18n: "dashboard"
     },
-    group: [],
-    close: false
+    group: []
   },
   //配置菜单的属性
   menu: {

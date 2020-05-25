@@ -1,5 +1,5 @@
 <template>
-  <!-- @keyup.enter.native="handleLogin" -->
+
   <div class="login-container"
        ref="login">
     <top-color v-show="false" />
@@ -17,19 +17,10 @@
         <div class="login-main">
           <h4 class="login-title">
             {{ $t('login.title') }}{{website.title}}
-            <!-- <top-lang /> -->
+
           </h4>
           <userLogin />
-          <!-- <codeLogin v-else-if="activeName==='code'"/>
-          <thirdLogin v-else-if="activeName==='third'"/>
-          <div class="login-menu">
-            <a href="#"
-               @click.stop="activeName='user'">{{ $t('login.userLogin') }}</a>
-            <a href="#"
-               @click.stop="activeName='code'">{{ $t('login.phoneLogin') }}</a>
-            <a href="#"
-               @click.stop="activeName='third'">{{ $t('login.thirdLogin') }}</a>
-          </div> -->
+          
         </div>
 
       </div>
@@ -38,8 +29,6 @@
 </template>
 <script>
 import userLogin from "./userlogin";
-import codeLogin from "./codelogin";
-import thirdLogin from "./thirdlogin";
 import { mapGetters } from "vuex";
 import { dateFormat } from "@/util/date";
 import { validatenull } from "@/util/validate";
@@ -50,8 +39,6 @@ export default {
   name: "login",
   components: {
     userLogin,
-    codeLogin,
-    thirdLogin,
     topLang,
     topColor
   },
