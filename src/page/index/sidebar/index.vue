@@ -2,7 +2,7 @@
   <div class="aceisee-sidebar">
     <logo></logo>
     <el-scrollbar style="height:100%">
-      <div v-if="validatenull(menu)" class="aceisee-sidebar--tip">
+      <div v-if="validatenull(menuList)" class="aceisee-sidebar--tip">
         {{ $t("menuTip") }}
       </div>
       <el-menu
@@ -13,7 +13,7 @@
         :collapse="keyCollapse"
       >
         <sidebar-item
-          :menu="menu"
+          :menu="menuList"
           :screen="screen"
           first
           :props="website.menu.props"
@@ -47,7 +47,8 @@ export default {
       "tag",
       "keyCollapse",
       "screen",
-      "menuId"
+      "menuId",
+      "menuList"
     ]),
     nowTagValue: function() {
       return this.$router.$aceiseeRouter.getValue(this.$route);

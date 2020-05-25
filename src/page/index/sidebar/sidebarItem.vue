@@ -26,7 +26,7 @@
         </template>
         <template v-for="(child, cindex) in item[childrenKey]">
           <el-menu-item
-            :index="(child[pathKey], cindex)"
+            :index="child[pathKey]"
             @click="open(child)"
             :class="{ 'is-active': vaildAvtive(child) }"
             v-if="validatenull(child[childrenKey])"
@@ -82,7 +82,9 @@ export default {
     }
   },
   created() {},
-  mounted() {},
+  mounted() {
+    console.log(this.menu)
+  },
   computed: {
     ...mapGetters(["roles"]),
     labelKey() {
@@ -125,16 +127,7 @@ export default {
       if (this.screen <= 1) this.$store.commit("SET_COLLAPSE");
       this.$router.$aceiseeRouter.group = item.group;
       this.$router.$aceiseeRouter.meta = item.meta;
-      this.$router.push({
-        path: this.$router.$aceiseeRouter.getPath(
-          {
-            name: item[this.labelKey],
-            src: item[this.pathKey]
-          },
-          item.meta
-        ),
-        query: item.query
-      });
+      this.$router.push(item.path).catch(err => {err});
     }
   }
 };

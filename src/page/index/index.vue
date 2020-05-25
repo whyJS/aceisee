@@ -13,10 +13,6 @@
       <div class="aceisee-main">
         <!-- 顶部标签卡 -->
         <tags />
-        <transition name="fade-scale">
-          <search class="aceisee-view"
-                  v-show="isSearch"></search>
-        </transition>
         <!-- 主体视图层 -->
         <div style="height:100%;overflow-y:auto;overflow-x:hidden;"
              id="aceisee-view"
@@ -70,13 +66,12 @@ export default {
     };
   },
   created () {
-    //实时检测刷新token
-    // this.refreshToken();
+    
   },
   mounted () {
     this.init();
   },
-  computed: mapGetters(["isMenu", "isLock", "isCollapse", "website", "menu"]),
+  computed: mapGetters(["isMenu", "isLock", "isCollapse", "website"]),
   props: [],
   methods: {
     showCollapse () {
@@ -95,55 +90,7 @@ export default {
     },
     //打开菜单
     openMenu (item = {}) {
-      this.$store.dispatch("GetMenu", item.id).then(data => {
-        if (data.length !== 0) {
-          this.$router.$aceiseeRouter.formatRoutes(data, true);
-        }
-        //当点击顶部菜单后默认打开第一个菜单
-        /*if (!this.validatenull(item)) {
-          let itemActive = {},
-            childItemActive = 0;
-          if (item.path) {
-            itemActive = item;
-          } else {
-            if (this.menu[childItemActive].length === 0) {
-              itemActive = this.menu[childItemActive];
-            } else {
-              itemActive = this.menu[childItemActive].children[childItemActive];
-            }
-          }
-          this.$store.commit('SET_MENU_ID', item);
-          this.$router.push({
-            path: this.$router.$aceiseeRouter.getPath({
-              name: (itemActive.label || itemActive.name),
-              src: itemActive.path
-            }, itemActive.meta)
-          });
-        }*/
-      });
-    },
-    // 定时检测token
-    refreshToken () {
-      this.refreshTime = setInterval(() => {
-        const token =
-          getStore({
-            name: "token",
-            debug: true
-          }) || {};
-        const date = calcDate(token.datetime, new Date().getTime());
-        if (validatenull(date)) return;
-        if (date.seconds >= this.website.tokenTime && !this.refreshLock) {
-          this.refreshLock = true;
-          this.$store
-            .dispatch("refreshToken")
-            .then(() => {
-              this.refreshLock = false;
-            })
-            .catch(() => {
-              this.refreshLock = false;
-            });
-        }
-      }, 10000);
+      console.log('xxxx')
     }
   }
 };

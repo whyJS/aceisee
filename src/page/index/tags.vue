@@ -33,23 +33,6 @@
         >
         </el-tab-pane>
       </el-tabs>
-      <el-dropdown class="aceisee-tags__menu">
-        <el-button type="primary" size="mini">
-          {{ $t("tagsView.menu") }}
-          <i class="el-icon-arrow-down el-icon--right"></i>
-        </el-button>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="$parent.isSearch = true">{{
-            $t("tagsView.search")
-          }}</el-dropdown-item>
-          <el-dropdown-item @click.native="closeOthersTags">{{
-            $t("tagsView.closeOthers")
-          }}</el-dropdown-item>
-          <el-dropdown-item @click.native="closeAllTags">{{
-            $t("tagsView.closeAll")
-          }}</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
     </div>
   </div>
 </template>
@@ -102,7 +85,7 @@ export default {
     },
     handleContextmenu(event) {
       let target = event.target;
-      // 解决 https://github.com/d2-projects/d2-admin/issues/54
+     
       let flag = false;
       if (target.className.indexOf("el-tabs__item") > -1) flag = true;
       else if (target.parentNode.className.indexOf("el-tabs__item") > -1) {
@@ -148,7 +131,7 @@ export default {
           tag.meta
         ),
         query: tag.query
-      });
+      }).catch(err => {err});
     },
     closeOthersTags() {
       this.contextmenuFlag = false;

@@ -1,8 +1,7 @@
 import {
   setToken,
   setRefreshToken,
-  removeToken,
-  removeRefreshToken
+  removeToken
 } from "@/util/auth";
 import { Message } from "element-ui";
 import { setStore, getStore } from "@/util/store";
@@ -12,11 +11,12 @@ import website from "@/config/website";
 import {
   loginByUsername,
   getUserInfo,
-  logout,
   refreshToken,
   getButtons
 } from "@/api/user";
 import { getTopMenu, getRoutes } from "@/api/system/menu";
+
+import ViewsRouter from "@/router/views/"; // 页面路由
 
 function addPath(ele, first) {
   const menu = website.menu;
@@ -51,7 +51,8 @@ const user = {
     menuId: getStore({ name: "menuId" }) || [],
     menuAll: getStore({ name: "menuAll" }) || [],
     token: getStore({ name: "token" }) || "",
-    refreshToken: getStore({ name: "refreshToken" }) || ""
+    refreshToken: getStore({ name: "refreshToken" }) || "",
+    menuList:ViewsRouter
   },
   actions: {
     //根据用户名登录
@@ -69,64 +70,13 @@ const user = {
         }, 10);
       });
     },
-    GetButtons({ commit }) {
-      return new Promise(resolve => {
-        getButtons({
-          sysType: website.sysType
-        }).then(res => {
-          const data = res.data.data;
-          commit("SET_PERMISSION", data);
-          resolve();
-        });
-      });
-    },
-    //根据手机号登录
-    LoginByPhone({ commit }, userInfo) {
-      return new Promise(resolve => {
-        loginByUsername(userInfo.phone, userInfo.code).then(res => {
-          const data = res.data.data;
-          commit("SET_TOKEN", data);
-          commit("DEL_ALL_TAG");
-          commit("CLEAR_LOCK");
-          resolve();
-        });
-      });
-    },
-    GetUserInfo({ commit }) {
-      return new Promise((resolve, reject) => {
-        getUserInfo()
-          .then(res => {
-            const data = res.data.data;
-            commit("SET_ROLES", data.roles);
-            resolve(data);
-          })
-          .catch(err => {
-            reject(err);
-          });
-      });
-    },
-    //刷新token
-    refreshToken({ state, commit }) {
-      console.log("handle refresh token");
-      return new Promise((resolve, reject) => {
-        refreshToken(state.refreshToken, state.tenantId)
-          .then(res => {
-            const data = res.data;
-            commit("SET_TOKEN", data.access_token);
-            commit("SET_REFRESH_TOKEN", data.refresh_token);
-            resolve();
-          })
-          .catch(error => {
-            reject(error);
-          });
-      });
-    },
+
+
     // 登出
     LogOut({ commit }) {
       return new Promise((resolve, reject) => {
-        logout()
-          .then(() => {
-            commit("SET_TOKEN", "");
+        setTimeout(() => {
+          commit("SET_TOKEN", "");
             commit("SET_MENU", []);
             commit("SET_MENU_ID", {});
             commit("SET_MENU_ALL", []);
@@ -134,55 +84,13 @@ const user = {
             commit("DEL_ALL_TAG");
             commit("CLEAR_LOCK");
             removeToken();
-            removeRefreshToken();
+            window.localStorage.clear()
+            window.sessionStorage.clear()
             resolve();
-          })
-          .catch(error => {
-            reject(error);
-          });
+
+        }, 10);
       });
     },
-    //注销session
-    FedLogOut({ commit }) {
-      return new Promise(resolve => {
-        commit("SET_TOKEN", "");
-        commit("SET_MENU_ID", {});
-        commit("SET_MENU_ALL", []);
-        commit("SET_MENU", []);
-        commit("SET_ROLES", []);
-        commit("DEL_ALL_TAG");
-        commit("CLEAR_LOCK");
-        removeToken();
-        removeRefreshToken();
-        resolve();
-      });
-    },
-    //获取顶部菜单
-    GetTopMenu() {
-      return new Promise(resolve => {
-        getTopMenu().then(res => {
-          const data = res.data.data || [];
-          resolve(data);
-        });
-      });
-    },
-    //获取系统菜单
-    GetMenu({ commit, dispatch }, topMenuId) {
-      return new Promise(resolve => {
-        getRoutes(topMenuId, {
-          sysType: website.sysType
-        }).then(res => {
-          const data = res.data.data;
-          let menu = deepClone(data);
-          menu.forEach(ele => {
-            addPath(ele, true);
-          });
-          commit("SET_MENU", menu);
-          dispatch("GetButtons");
-          resolve(menu);
-        });
-      });
-    }
   },
   mutations: {
     SET_TOKEN: (state, token) => {

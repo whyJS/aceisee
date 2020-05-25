@@ -4,10 +4,12 @@ export default [
   {
     path: "/wel",
     component: Layout,
+    name: "zz",
+    source:"iconfont iconicon_work",
     redirect: "/wel/index",
     children: [
       {
-        path: "index",
+        path: "/wel/index",
         name: "首页",
         meta: {
           i18n: "dashboard"
@@ -24,7 +26,7 @@ export default [
     redirect: "/info/index",
     children: [
       {
-        path: "index",
+        path: "/info/index",
         name: "个人信息",
         meta: {
           i18n: "info"

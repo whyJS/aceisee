@@ -13,9 +13,7 @@
       <div class="top-bar__item top-bar__item--show" v-if="showMenu">
         <top-menu ref="topMenu"></top-menu>
       </div>
-      <span class="top-bar__item" v-if="showSearch">
-        <top-search></top-search>
-      </span>
+      
     </div>
     <div class="top-bar__right">
       <el-tooltip
@@ -97,23 +95,23 @@ import { mapGetters, mapState } from "vuex";
 import { fullscreenToggel, listenfullscreen } from "@/util/util";
 import topLock from "./top-lock";
 import topMenu from "./top-menu";
-import topSearch from "./top-search";
+// import topSearch from "./top-search";
 import topTheme from "./top-theme";
-import topLogs from "./top-logs";
+// import topLogs from "./top-logs";
 import topColor from "./top-color";
 import topNotice from "./top-notice";
-import topLang from "./top-lang";
+// import topLang from "./top-lang";
 
 export default {
   components: {
     topLock,
     topMenu,
-    topSearch,
+    // topSearch,
     topTheme,
-    topLogs,
+    // topLogs,
     topColor,
     topNotice,
-    topLang
+    // topLang
   },
   name: "top",
   data() {
@@ -143,9 +141,7 @@ export default {
       "tagWel",
       "tagList",
       "isCollapse",
-      "tag",
-      "logsLen",
-      "logsFlag"
+      "tag"
     ])
   },
   methods: {
