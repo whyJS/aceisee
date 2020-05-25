@@ -14,16 +14,6 @@ export default [
         },
         component: () =>
           import(/* webpackChunkName: "views" */ "@/views/wel/index")
-      },
-      {
-        path: "dashboard",
-        name: "控制台",
-        meta: {
-          i18n: "dashboard",
-          menu: false
-        },
-        component: () =>
-          import(/* webpackChunkName: "views" */ "@/views/wel/dashboard")
       }
     ]
   },

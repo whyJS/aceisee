@@ -7,8 +7,8 @@ export default {
   search: "请输入搜索内容",
   menuTip: "没有发现菜单",
   wel: {
-    info: "早安，Smallwei，Avuex一款超乎你想象的框架！",
-    dept: "我是avue团队下的一个部门-哈皮部门-哈皮职位",
+    info: "早安，Smallwei，aceiseex一款超乎你想象的框架！",
+    dept: "我是aceisee团队下的一个部门-哈皮部门-哈皮职位",
     team: "团队内排名",
     project: "项目访问",
     count: "项目数",
@@ -50,7 +50,7 @@ export default {
   route: {
     info: "个人信息",
     website: "goldnetx官网",
-    avuexwebsite: "avuex官网",
+    aceiseexwebsite: "aceiseex官网",
     dashboard: "首页",
     more: "更多",
     tags: "标签",

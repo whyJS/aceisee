@@ -1,36 +1,36 @@
 <template>
-  <div class="avue-contail"
-       :class="{'avue--collapse':isCollapse}">
-    <div class="avue-header">
+  <div class="aceisee-contail"
+       :class="{ 'aceisee--collapse': isCollapse }">
+    <div class="aceisee-header">
       <!-- 顶部导航栏 -->
       <top ref="top" />
     </div>
-    <div class="avue-layout">
-      <div class="avue-left">
+    <div class="aceisee-layout">
+      <div class="aceisee-left">
         <!-- 左侧导航栏 -->
         <sidebar />
       </div>
-      <div class="avue-main">
+      <div class="aceisee-main">
         <!-- 顶部标签卡 -->
         <tags />
         <transition name="fade-scale">
-          <search class="avue-view"
+          <search class="aceisee-view"
                   v-show="isSearch"></search>
         </transition>
         <!-- 主体视图层 -->
         <div style="height:100%;overflow-y:auto;overflow-x:hidden;"
-             id="avue-view"
+             id="aceisee-view"
              v-show="!isSearch">
           <keep-alive>
-            <router-view class="avue-view"
+            <router-view class="aceisee-view"
                          v-if="$route.meta.$keepAlive" />
           </keep-alive>
-          <router-view class="avue-view"
+          <router-view class="aceisee-view"
                        v-if="!$route.meta.$keepAlive" />
         </div>
       </div>
     </div>
-    <div class="avue-shade"
+    <div class="aceisee-shade"
          @click="showCollapse"></div>
   </div>
 </template>
@@ -71,7 +71,7 @@ export default {
   },
   created () {
     //实时检测刷新token
-    this.refreshToken();
+    // this.refreshToken();
   },
   mounted () {
     this.init();
@@ -97,7 +97,7 @@ export default {
     openMenu (item = {}) {
       this.$store.dispatch("GetMenu", item.id).then(data => {
         if (data.length !== 0) {
-          this.$router.$avueRouter.formatRoutes(data, true);
+          this.$router.$aceiseeRouter.formatRoutes(data, true);
         }
         //当点击顶部菜单后默认打开第一个菜单
         /*if (!this.validatenull(item)) {
@@ -114,22 +114,22 @@ export default {
           }
           this.$store.commit('SET_MENU_ID', item);
           this.$router.push({
-            path: this.$router.$avueRouter.getPath({
+            path: this.$router.$aceiseeRouter.getPath({
               name: (itemActive.label || itemActive.name),
               src: itemActive.path
             }, itemActive.meta)
           });
         }*/
-
       });
     },
     // 定时检测token
     refreshToken () {
       this.refreshTime = setInterval(() => {
-        const token = getStore({
-          name: "token",
-          debug: true
-        }) || {};
+        const token =
+          getStore({
+            name: "token",
+            debug: true
+          }) || {};
         const date = calcDate(token.datetime, new Date().getTime());
         if (validatenull(date)) return;
         if (date.seconds >= this.website.tokenTime && !this.refreshLock) {

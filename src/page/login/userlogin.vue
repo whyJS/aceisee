@@ -5,17 +5,6 @@
            ref="loginForm"
            :model="loginForm"
            label-width="0">
-    <!-- <el-form-item v-if="tenantMode"
-                  prop="tenantId">
-      <el-input size="small"
-                @keyup.enter.native="handleLogin"
-                v-model="loginForm.tenantId"
-                auto-complete="off"
-                :placeholder="$t('login.tenantId')">
-        <i slot="prefix"
-           class="icon-quanxian" />
-      </el-input>
-    </el-form-item> -->
     <el-form-item prop="username">
       <el-input size="small"
                 @keyup.enter.native="handleLogin"
@@ -23,7 +12,7 @@
                 auto-complete="off"
                 :placeholder="$t('login.username')">
         <i slot="prefix"
-           class="icon-yonghu" />
+           class="el-icon-user" />
       </el-input>
     </el-form-item>
     <el-form-item prop="pass">
@@ -65,7 +54,7 @@
       <el-button type="primary"
                  size="small"
                  @click.native.prevent="handleLogin"
-                 class="login-submit">{{$t('login.submit')}}
+                 class="login-submit">{{ $t("login.submit") }}
       </el-button>
     </el-form-item>
   </el-form>
@@ -73,7 +62,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import website from '@/config/website';
+import website from "@/config/website";
 import { info } from "@/api/system/tenant";
 import { getCaptcha } from "@/api/user";
 // import { sha256_digest } from '@/util/sha256.js'
@@ -89,7 +78,7 @@ export default {
         username: "",
         //密码
         pass: "",
-        password: '',
+        password: "",
         //账户类型
         type: "account",
         //验证码的值
@@ -97,7 +86,8 @@ export default {
         //验证码的索引
         key: "",
         //预加载白色背景
-        image: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        image:
+          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
       },
       loginRules: {
         tenantId: [
@@ -118,8 +108,7 @@ export default {
     this.getTenant();
     this.refreshCode();
   },
-  mounted () {
-  },
+  mounted () { },
   computed: {
     ...mapGetters(["tagWel"])
   },
@@ -130,7 +119,7 @@ export default {
         const data = res.data;
         this.loginForm.key = data.key;
         this.loginForm.image = data.image;
-      })
+      });
     },
     showPassword () {
       this.passwordType === ""
@@ -142,18 +131,21 @@ export default {
         if (valid) {
           const loading = this.$loading({
             lock: true,
-            text: '登录中,请稍后。。。',
+            text: "登录中,请稍后。。。",
             spinner: "el-icon-loading"
           });
-          this.loginForm.password = this.loginForm.pass
+          this.loginForm.password = this.loginForm.pass;
           // this.loginForm.password = sha256_digest(this.loginForm.pass)
-          this.$store.dispatch("LoginByUsername", this.loginForm).then(() => {
-            this.$router.push({ path: this.tagWel.value });
-            loading.close();
-          }).catch(() => {
-            loading.close();
-            this.refreshCode();
-          });
+          this.$store
+            .dispatch("LoginByUsername", this.loginForm)
+            .then(() => {
+              this.$router.push({ path: this.tagWel.value });
+              loading.close();
+            })
+            .catch(() => {
+              loading.close();
+              this.refreshCode();
+            });
         }
       });
     },
@@ -168,11 +160,10 @@ export default {
           this.loginForm.tenantId = data.data.tenantId;
           this.$parent.$refs.login.style.backgroundImage = `url(${data.data.backgroundUrl})`;
         }
-      })
+      });
     }
   }
 };
 </script>
 
-<style>
-</style>
+<style></style>

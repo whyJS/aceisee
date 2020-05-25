@@ -1,6 +1,4 @@
 import Vue from "vue";
-// import Avue from "@smallwei/avue";
-// import "@smallwei/avue/lib/index.css";
 import axios from "./router/axios";
 import VueAxios from "vue-axios";
 import App from "./App";
@@ -26,9 +24,6 @@ Vue.use(VueAxios, axios);
 Vue.use(Element, {
   i18n: (key, value) => i18n.t(key, value)
 });
-// Vue.use(Avue, {
-//   i18n: (key, value) => i18n.t(key, value)
-// });
 //注册全局容器
 Vue.component("basicContainer", basicContainer);
 Vue.component("basicBlock", basicBlock);

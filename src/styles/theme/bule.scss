@@ -1,25 +1,26 @@
-.theme-bule{
-  
-  .avue-header,.avue-logo{
+.theme-bule {
+  .aceisee-header,
+  .aceisee-logo {
     background: #004ca7;
   }
-  .avue-sidebar{
+  .aceisee-sidebar {
     background: #004ca7;
-    .el-menu-item.is-active, .el-submenu__title.is-active {
-        background-color: rgba(0, 0, 0, 0.2);
+    .el-menu-item.is-active,
+    .el-submenu__title.is-active {
+      background-color: rgba(0, 0, 0, 0.2);
     }
   }
-  .el-dropdown{
+  .el-dropdown {
     color: #fff;
   }
-  .avue-logo{
-    .avue-logo_title{
-      color:#fff;
+  .aceisee-logo {
+    .aceisee-logo_title {
+      color: #fff;
     }
   }
-  .avue-breadcrumb{
-    i{
-      color:#fff;
+  .aceisee-breadcrumb {
+    i {
+      color: #fff;
     }
   }
 
@@ -28,18 +29,17 @@
       color: #fff;
     }
   }
-  .avue-top{
-   
+  .aceisee-top {
     .el-menu-item {
+      i,
+      span {
+        color: #fff;
+      }
+      &:hover {
         i,
         span {
           color: #fff;
         }
-      &:hover {
-          i,
-          span {
-            color: #fff;
-          }
       }
     }
   }

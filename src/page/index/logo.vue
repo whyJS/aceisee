@@ -1,16 +1,15 @@
 <template>
-  <div class="avue-logo">
+  <div class="aceisee-logo">
     <transition name="fade">
-      <span v-if="keyCollapse"
-            class="avue-logo_subtitle"
-            key="0">
-        {{website.logo}}
+      <span v-if="keyCollapse" class="aceisee-logo_subtitle" key="0">
+        {{ website.logo }}
       </span>
     </transition>
     <transition-group name="fade">
       <template v-if="!keyCollapse">
-        <span class="avue-logo_title"
-              key="1">{{website.indexTitle}} </span>
+        <span class="aceisee-logo_title" key="1"
+          >{{ website.indexTitle }}
+        </span>
       </template>
     </transition-group>
   </div>
@@ -42,7 +41,7 @@ export default {
 .fade-leave-to {
   opacity: 0;
 }
-.avue-logo {
+.aceisee-logo {
   position: fixed;
   top: 0;
   left: 0;

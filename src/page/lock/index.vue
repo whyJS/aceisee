@@ -1,23 +1,27 @@
 <template>
   <div class="lock-container">
     <div class="lock-form animated bounceInDown">
-      <div class="animated"
-           :class="{'shake':passwdError,'bounceOut':pass}">
-        <h3 class="title">{{userInfo.username}}</h3>
-        <el-input placeholder="请输入登录密码"
-                  type="password"
-                  class="input-with-select animated"
-                  v-model="passwd"
-                  @keyup.enter.native="handleLogin">
-          <el-button slot="append"
-                     icon="icon-bofangqi-suoping"
-                     @click="handleLogin"></el-button>
-          <el-button slot="append"
-                     icon="icon-tuichu"
-                     @click="handleLogout"></el-button>
+      <div class="animated" :class="{ shake: passwdError, bounceOut: pass }">
+        <h3 class="title">{{ userInfo.username }}</h3>
+        <el-input
+          placeholder="请输入登录密码"
+          type="password"
+          class="input-with-select animated"
+          v-model="passwd"
+          @keyup.enter.native="handleLogin"
+        >
+          <el-button
+            slot="append"
+            icon="icon-bofangqi-suoping"
+            @click="handleLogin"
+          ></el-button>
+          <el-button
+            slot="append"
+            icon="icon-tuichu"
+            @click="handleLogout"
+          ></el-button>
         </el-input>
       </div>
-
     </div>
   </div>
 </template>
@@ -70,7 +74,7 @@ export default {
       setTimeout(() => {
         this.$store.commit("CLEAR_LOCK");
         this.$router.push({
-          path: this.$router.$avueRouter.getPath({ src: this.tag.value })
+          path: this.$router.$aceiseeRouter.getPath({ src: this.tag.value })
         });
       }, 1000);
     }

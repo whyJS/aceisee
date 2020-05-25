@@ -1,14 +1,13 @@
-.avue-left,
-.avue-header,
-.avue-top,
-.avue-logo,
-.avue-layout
-.login-logo,
-.avue-main {
-  transition: all .3s;
+.aceisee-left,
+.aceisee-header,
+.aceisee-top,
+.aceisee-logo,
+.aceisee-layout .login-logo,
+.aceisee-main {
+  transition: all 0.3s;
 }
 
-.avue-contail {
+.aceisee-contail {
   width: 100%;
   height: 100%;
   background: #f0f2f5;
@@ -16,8 +15,7 @@
   background-repeat: no-repeat;
 }
 
-
-.avue-left {
+.aceisee-left {
   position: fixed;
   left: 0;
   top: 0;
@@ -26,30 +24,30 @@
   z-index: 1025;
 }
 
-.avue--collapse {
-  .avue-left,
-  .avue-logo {
+.aceisee--collapse {
+  .aceisee-left,
+  .aceisee-logo {
     width: 60px;
   }
 
-  .avue-header {
+  .aceisee-header {
     padding-left: 60px;
   }
 
-  .avue-main {
+  .aceisee-main {
     width: calc(100% - 60px);
     left: 60px;
   }
 }
 
-.avue-header {
+.aceisee-header {
   padding-left: 240px;
   width: 100%;
   background-color: #fff;
   box-sizing: border-box;
 }
 
-.avue-main {
+.aceisee-main {
   position: absolute;
   left: 240px;
   padding: 0;
@@ -68,13 +66,13 @@
   }
 }
 
-.avue-view {
+.aceisee-view {
   padding: 0 10px !important;
   width: 100%;
   box-sizing: border-box;
 }
 
-.avue-footer {
+.aceisee-footer {
   margin: 0 auto;
   padding: 0 22px;
   width: 1300px;
@@ -93,7 +91,7 @@
   }
 }
 
-.avue-shade {
+.aceisee-shade {
   position: fixed;
   display: none;
   width: 100%;
@@ -102,7 +100,7 @@
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, .3);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 1024;
 
   &--show {
@@ -140,42 +138,42 @@
     width: 100% !important;
   }
   //主框架
-  .avue-tags {
+  .aceisee-tags {
     display: none;
   }
-  .avue-left,
-  .avue-logo {
+  .aceisee-left,
+  .aceisee-logo {
     left: -$width;
   }
-  .avue-main {
+  .aceisee-main {
     left: 0;
     width: 100%;
   }
-  .avue-header {
+  .aceisee-header {
     margin-bottom: 15px;
     padding-left: 15px;
   }
   .top-bar__item {
     display: none;
   }
-  .avue--collapse {
-    .avue-left,
-    .avue-logo {
+  .aceisee--collapse {
+    .aceisee-left,
+    .aceisee-logo {
       width: $width;
       left: 0;
     }
 
-    .avue-main {
+    .aceisee-main {
       left: $width;
       width: 100%;
     }
 
-    .avue-header {
+    .aceisee-header {
       padding: 0;
       transform: translate3d(230px, 0, 0);
     }
 
-    .avue-shade {
+    .aceisee-shade {
       display: block;
     }
   }

@@ -5,19 +5,15 @@ import elementZhLocale from "element-ui/lib/locale/lang/zh-CN"; // element-ui la
 import enLocale from "./en";
 import zhLocale from "./zh";
 import { getStore } from "@/util/store";
-// import Avue from "@smallwei/avue";
 Vue.use(VueI18n);
-// const Avue = window.AVUE;
 const messages = {
   en: {
     ...enLocale,
-    ...elementEnLocale,
-    // ...Avue.locale.en
+    ...elementEnLocale
   },
   zh: {
     ...zhLocale,
-    ...elementZhLocale,
-    // ...Avue.locale.zh
+    ...elementZhLocale
   }
 };
 

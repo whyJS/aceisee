@@ -28,7 +28,7 @@ export const getObjType = obj => {
 };
 export const getViewDom = () => {
   return window.document
-    .getElementById("avue-view")
+    .getElementById("aceisee-view")
     .getElementsByClassName("el-scrollbar__wrap")[0];
 };
 /**

@@ -55,36 +55,18 @@ const user = {
   },
   actions: {
     //根据用户名登录
-    LoginByUsername({ commit }, userInfo) {
+    LoginByUsername({ commit }) {
       return new Promise((resolve, reject) => {
-        loginByUsername(
-          userInfo.tenantId,
-          userInfo.username,
-          userInfo.password,
-          userInfo.type,
-          userInfo.key,
-          userInfo.code
-        )
-          .then(res => {
-            const data = res.data;
-            if (data.error_description) {
-              Message({
-                message: data.error_description,
-                type: "error"
-              });
-            } else {
-              commit("SET_TOKEN", data.access_token);
-              commit("SET_REFRESH_TOKEN", data.refresh_token);
-              commit("SET_TENANT_ID", data.tenant_id);
-              commit("SET_USER_INFO", data);
-              commit("DEL_ALL_TAG");
-              commit("CLEAR_LOCK");
-            }
-            resolve();
-          })
-          .catch(error => {
-            reject(error);
-          });
+        setTimeout(() => {
+          commit("SET_TOKEN", "这是测试token");
+          commit("SET_REFRESH_TOKEN", "这是测试token");
+
+          commit("SET_USER_INFO", {});
+          commit("DEL_ALL_TAG");
+          commit("CLEAR_LOCK");
+
+          resolve();
+        }, 10);
       });
     },
     GetButtons({ commit }) {

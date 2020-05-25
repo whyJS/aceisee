@@ -22,7 +22,7 @@ RouterPlugin.install = function(vue, router, store, i18n) {
     return result.join("&");
   }
 
-  this.$router.$avueRouter = {
+  this.$router.$aceiseeRouter = {
     //全局配置
     $website: this.$store.getters.website,
     routerList: [],

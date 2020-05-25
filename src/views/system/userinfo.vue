@@ -1,9 +1,13 @@
 <template>
   <div>
     <basic-container>
-      <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="个人信息" name="first">
-          <el-form ref="form" :model="form" label-width="100px">
+      <el-tabs v-model="activeName"
+               @tab-click="handleClick">
+        <el-tab-pane label="个人信息"
+                     name="first">
+          <el-form ref="form"
+                   :model="form"
+                   label-width="100px">
             <el-form-item label="用户姓名:">
               <el-input v-model="form.userName"></el-input>
             </el-form-item>
@@ -13,11 +17,15 @@
             </el-form-item>
 
             <el-form-item label="用户年龄:">
-              <el-input v-model.trim="form.age" type="number" maxlength="50" />
+              <el-input v-model.trim="form.age"
+                        type="number"
+                        maxlength="50" />
             </el-form-item>
 
             <el-form-item label="邮箱地址:">
-              <el-input v-model.trim="form.email" type="email" maxlength="50" />
+              <el-input v-model.trim="form.email"
+                        type="email"
+                        maxlength="50" />
             </el-form-item>
 
             <el-form-item label="用户性别:">
@@ -28,47 +36,41 @@
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary" @click="handleSubmit"
-                >立即修改</el-button
-              >
+              <el-button type="primary"
+                         @click="handleSubmit">立即修改</el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
-        <el-tab-pane label="修改密码" name="second">
-          <el-form
-            ref="password"
-            :model="query"
-            :rules="rules"
-            label-width="100px"
-          >
-            <el-form-item prop="oldPassword" label="原密码:">
-              <el-input
-                v-model="query.oldPassword"
-                placeholder="请输入原密码"
-                type="password"
-                show-password
-              ></el-input>
+        <el-tab-pane label="修改密码"
+                     name="second">
+          <el-form ref="password"
+                   :model="query"
+                   :rules="rules"
+                   label-width="100px">
+            <el-form-item prop="oldPassword"
+                          label="原密码:">
+              <el-input v-model="query.oldPassword"
+                        placeholder="请输入原密码"
+                        type="password"
+                        show-password></el-input>
             </el-form-item>
-            <el-form-item prop="newPassword" label="确认新密码:">
-              <el-input
-                v-model="query.newPassword"
-                placeholder="请输入新密码"
-                type="password"
-                show-password
-              ></el-input>
+            <el-form-item prop="newPassword"
+                          label="确认新密码:">
+              <el-input v-model="query.newPassword"
+                        placeholder="请输入新密码"
+                        type="password"
+                        show-password></el-input>
             </el-form-item>
-            <el-form-item newPassword1 label="确认新密码:">
-              <el-input
-                v-model="query.newPassword1"
-                placeholder="确认新密码"
-                type="password"
-                show-password
-              ></el-input>
+            <el-form-item newPassword1
+                          label="确认新密码:">
+              <el-input v-model="query.newPassword1"
+                        placeholder="确认新密码"
+                        type="password"
+                        show-password></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="handleSubmit"
-                >立即修改</el-button
-              >
+              <el-button type="primary"
+                         @click="handleSubmit">立即修改</el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
@@ -78,11 +80,11 @@
 </template>
 
 <script>
-import option from "@/const/user/info";
+// import option from "@/const/user/info";
 import { getUserInfo, updateUserInfo, updatePassword } from "@/api/system/user";
 
 export default {
-  data() {
+  data () {
     const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("密码不能为空"));
@@ -101,7 +103,6 @@ export default {
     };
     return {
       type: "info",
-      option: option,
       form: {},
       activeName: "first",
       query: {
@@ -122,11 +123,11 @@ export default {
       }
     };
   },
-  created() {
+  created () {
     this._userInfo();
   },
   methods: {
-    handleSubmit() {
+    handleSubmit () {
       if (this.activeName === "first") {
         this.form.userId = this.form.id;
         updateUserInfo(this.form).then(res => {
@@ -174,7 +175,7 @@ export default {
       }
     },
 
-    handleClick(tab) {
+    handleClick (tab) {
       if (tab.name === "first") {
         getUserInfo().then(res => {
           const user = res.data.data;
@@ -182,7 +183,7 @@ export default {
         });
       }
     },
-    _userInfo() {
+    _userInfo () {
       getUserInfo().then(res => {
         const user = res.data.data;
         this.form = user;

@@ -20,12 +20,12 @@ const top = [
     parentId: 1
   },
   {
-    label: "avuex官网",
+    label: "aceiseex官网",
     icon: "el-icon-document",
     meta: {
-      i18n: "avuexwebsite"
+      i18n: "aceiseexwebsite"
     },
-    path: "https://avuex.avue.top",
+    path: "https://aceiseex.aceisee.top",
     parentId: 2
   },
   {

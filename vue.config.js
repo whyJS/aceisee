@@ -3,20 +3,7 @@ module.exports = {
   publicPath: "/",
   lintOnSave: true,
   productionSourceMap: false,
-  chainWebpack: config => {
-    //忽略的打包文件
-    // config.externals({
-    //   'vue': 'Vue',
-    //   'vue-router': 'VueRouter',
-    //   'vuex': 'Vuex',
-    //   'axios': 'axios',
-    //   'element-ui': 'ELEMENT',
-    // });
-    const entry = config.entry("app");
-    entry.add("babel-polyfill").end();
-    entry.add("classlist-polyfill").end();
-    entry.add("@/mock").end();
-  },
+  chainWebpack: config => {},
   devServer: {
     port: 1888,
     proxy: {

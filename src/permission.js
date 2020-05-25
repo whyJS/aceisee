@@ -30,8 +30,7 @@ router.beforeEach((to, from, next) => {
       } else {
         const value = to.query.src || to.fullPath;
         const label = to.query.name || to.name;
-        const meta = to.meta || router.$avueRouter.meta || {};
-        const i18n = to.query.i18n;
+        const meta = to.meta || {};
         if (
           meta.isTab !== false &&
           !validatenull(value) &&
@@ -42,15 +41,8 @@ router.beforeEach((to, from, next) => {
             value: value,
             params: to.params,
             query: to.query,
-            meta: (() => {
-              if (!i18n) {
-                return meta;
-              }
-              return {
-                i18n: i18n
-              };
-            })(),
-            group: router.$avueRouter.group || []
+            meta: meta,
+            group: []
           });
         }
         next();
@@ -70,7 +62,7 @@ router.afterEach(() => {
   NProgress.done();
   let title = store.getters.tag.label;
   let i18n = store.getters.tag.meta.i18n;
-  title = router.$avueRouter.generateTitle(title, i18n);
+  title = router.$aceiseeRouter.generateTitle(title, i18n);
   //根据当前的标签也获取label的值动态设置浏览器标题
-  router.$avueRouter.setTitle(title);
+  router.$aceiseeRouter.setTitle(title);
 });
