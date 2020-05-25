@@ -6,6 +6,22 @@
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "app",
+  data() {
+    return {};
+  },
+  watch: {},
+  created() {
+
+  },
+  methods: {},
+  computed: {}
+};
 </script>
+<style lang="scss">
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+</style>

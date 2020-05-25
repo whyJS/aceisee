@@ -1,24 +1,77 @@
-import request from '@/utils/request'
+import request from "@/router/axios";
 
-export function login(data) {
-  return request({
-    url: '/vue-element-admin/user/login',
-    method: 'post',
-    data
-  })
-}
+export const loginByUsername = (
+  tenantId,
+  username,
+  password,
+  type,
+  key,
+  code
+) =>
+  request({
+    url: "/api/goldnet-auth/oauth/token",
+    method: "post",
+    headers: {
+      "Tenant-Id": tenantId,
+      "Captcha-Key": key,
+      "Captcha-Code": code
+    },
+    params: {
+      tenantId,
+      username,
+      password,
+      grant_type: "captcha",
+      scope: "all",
+      type
+    }
+  });
 
-export function getInfo(token) {
-  return request({
-    url: '/vue-element-admin/user/info',
-    method: 'get',
-    params: { token }
-  })
-}
+export const refreshToken = (refresh_token, tenantId) =>
+  request({
+    url: "/api/goldnet-auth/oauth/token",
+    method: "post",
+    headers: {
+      "Tenant-Id": tenantId
+    },
+    params: {
+      tenantId,
+      refresh_token,
+      grant_type: "refresh_token",
+      scope: "all"
+    }
+  });
 
-export function logout() {
+export const getButtons = params => {
   return request({
-    url: '/vue-element-admin/user/logout',
-    method: 'post'
-  })
-}
+    url: "/api/goldnet-system/menu/buttons",
+    method: "get",
+    params: {
+      ...params
+    }
+  });
+};
+
+export const getCaptcha = () =>
+  request({
+    url: "/api/goldnet-auth/oauth/captcha",
+    method: "get"
+  });
+
+export const logout = () =>
+  request({
+    url: "/api/goldnet-auth/oauth/logout",
+    method: "get"
+  });
+
+export const getUserInfo = () =>
+  request({
+    url: "/api/goldnet-auth/oauth/user-info",
+    method: "get"
+  });
+
+export const sendLogs = list =>
+  request({
+    url: "/api/goldnet-auth/oauth/logout",
+    method: "post",
+    data: list
+  });

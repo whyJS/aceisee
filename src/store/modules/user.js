@@ -1,145 +1,282 @@
-import { login, logout } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
-import router, { resetRouter } from '@/router'
+import {
+  setToken,
+  setRefreshToken,
+  removeToken,
+  removeRefreshToken
+} from "@/util/auth";
+import { Message } from "element-ui";
+import { setStore, getStore } from "@/util/store";
+import { isURL, validatenull } from "@/util/validate";
+import { deepClone } from "@/util/util";
+import website from "@/config/website";
+import {
+  loginByUsername,
+  getUserInfo,
+  logout,
+  refreshToken,
+  getButtons
+} from "@/api/user";
+import { getTopMenu, getRoutes } from "@/api/system/menu";
 
-const state = {
-  token: getToken(),
-  name: '',
-  avatar: '',
-  introduction: '',
-  roles: []
-}
-
-const mutations = {
-  SET_TOKEN: (state, token) => {
-    state.token = token
-  },
-  SET_INTRODUCTION: (state, introduction) => {
-    state.introduction = introduction
-  },
-  SET_NAME: (state, name) => {
-    state.name = name
-  },
-  SET_AVATAR: (state, avatar) => {
-    state.avatar = avatar
-  },
-  SET_ROLES: (state, roles) => {
-    state.roles = roles
+function addPath(ele, first) {
+  const menu = website.menu;
+  const propsConfig = menu.props;
+  const propsDefault = {
+    label: propsConfig.label || "name",
+    path: propsConfig.path || "path",
+    icon: propsConfig.icon || "icon",
+    children: propsConfig.children || "children"
+  };
+  const icon = ele[propsDefault.icon];
+  ele[propsDefault.icon] = validatenull(icon) ? menu.iconDefault : icon;
+  const isChild =
+    ele[propsDefault.children] && ele[propsDefault.children].length !== 0;
+  if (!isChild) ele[propsDefault.children] = [];
+  if (!isChild && first && !isURL(ele[propsDefault.path])) {
+    ele[propsDefault.path] = ele[propsDefault.path] + "/index";
+  } else {
+    ele[propsDefault.children].forEach(child => {
+      addPath(child);
+    });
   }
 }
 
-const actions = {
-  // user login
-  login({ commit }, userInfo) {
-    const { username, password } = userInfo
-    return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
+const user = {
+  state: {
+    tenantId: getStore({ name: "tenantId" }) || "",
+    userInfo: getStore({ name: "userInfo" }) || [],
+    permission: getStore({ name: "permission" }) || {},
+    roles: [],
+    menu: getStore({ name: "menu" }) || [],
+    menuId: getStore({ name: "menuId" }) || [],
+    menuAll: getStore({ name: "menuAll" }) || [],
+    token: getStore({ name: "token" }) || "",
+    refreshToken: getStore({ name: "refreshToken" }) || ""
   },
-
-  // get user info
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const data = { 'roles': ['admin'], 'introduction': 'I am a super administrator', 'avatar': 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif', 'name': 'Super Admin' }
-        const { roles, name, avatar, introduction } = data
-        commit('SET_ROLES', roles)
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        commit('SET_INTRODUCTION', introduction)
-        resolve(data)
-      }, 10)
-      // getInfo(state.token).then(response => {
-      //   const { data } = response
-
-      //   if (!data) {
-      //     reject('Verification failed, please Login again.')
-      //   }
-
-      //   const { roles, name, avatar, introduction } = data
-
-      //   // roles must be a non-empty array
-      //   if (!roles || roles.length <= 0) {
-      //     reject('getInfo: roles must be a non-null array!')
-      //   }
-
-      //   commit('SET_ROLES', roles)
-      //   commit('SET_NAME', name)
-      //   commit('SET_AVATAR', avatar)
-      //   commit('SET_INTRODUCTION', introduction)
-      //   resolve(data)
-      // }).catch(error => {
-      //   reject(error)
-      // })
-    })
+  actions: {
+    //根据用户名登录
+    LoginByUsername({ commit }, userInfo) {
+      return new Promise((resolve, reject) => {
+        loginByUsername(
+          userInfo.tenantId,
+          userInfo.username,
+          userInfo.password,
+          userInfo.type,
+          userInfo.key,
+          userInfo.code
+        )
+          .then(res => {
+            const data = res.data;
+            if (data.error_description) {
+              Message({
+                message: data.error_description,
+                type: "error"
+              });
+            } else {
+              commit("SET_TOKEN", data.access_token);
+              commit("SET_REFRESH_TOKEN", data.refresh_token);
+              commit("SET_TENANT_ID", data.tenant_id);
+              commit("SET_USER_INFO", data);
+              commit("DEL_ALL_TAG");
+              commit("CLEAR_LOCK");
+            }
+            resolve();
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    },
+    GetButtons({ commit }) {
+      return new Promise(resolve => {
+        getButtons({
+          sysType: website.sysType
+        }).then(res => {
+          const data = res.data.data;
+          commit("SET_PERMISSION", data);
+          resolve();
+        });
+      });
+    },
+    //根据手机号登录
+    LoginByPhone({ commit }, userInfo) {
+      return new Promise(resolve => {
+        loginByUsername(userInfo.phone, userInfo.code).then(res => {
+          const data = res.data.data;
+          commit("SET_TOKEN", data);
+          commit("DEL_ALL_TAG");
+          commit("CLEAR_LOCK");
+          resolve();
+        });
+      });
+    },
+    GetUserInfo({ commit }) {
+      return new Promise((resolve, reject) => {
+        getUserInfo()
+          .then(res => {
+            const data = res.data.data;
+            commit("SET_ROLES", data.roles);
+            resolve(data);
+          })
+          .catch(err => {
+            reject(err);
+          });
+      });
+    },
+    //刷新token
+    refreshToken({ state, commit }) {
+      console.log("handle refresh token");
+      return new Promise((resolve, reject) => {
+        refreshToken(state.refreshToken, state.tenantId)
+          .then(res => {
+            const data = res.data;
+            commit("SET_TOKEN", data.access_token);
+            commit("SET_REFRESH_TOKEN", data.refresh_token);
+            resolve();
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    },
+    // 登出
+    LogOut({ commit }) {
+      return new Promise((resolve, reject) => {
+        logout()
+          .then(() => {
+            commit("SET_TOKEN", "");
+            commit("SET_MENU", []);
+            commit("SET_MENU_ID", {});
+            commit("SET_MENU_ALL", []);
+            commit("SET_ROLES", []);
+            commit("DEL_ALL_TAG");
+            commit("CLEAR_LOCK");
+            removeToken();
+            removeRefreshToken();
+            resolve();
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    },
+    //注销session
+    FedLogOut({ commit }) {
+      return new Promise(resolve => {
+        commit("SET_TOKEN", "");
+        commit("SET_MENU_ID", {});
+        commit("SET_MENU_ALL", []);
+        commit("SET_MENU", []);
+        commit("SET_ROLES", []);
+        commit("DEL_ALL_TAG");
+        commit("CLEAR_LOCK");
+        removeToken();
+        removeRefreshToken();
+        resolve();
+      });
+    },
+    //获取顶部菜单
+    GetTopMenu() {
+      return new Promise(resolve => {
+        getTopMenu().then(res => {
+          const data = res.data.data || [];
+          resolve(data);
+        });
+      });
+    },
+    //获取系统菜单
+    GetMenu({ commit, dispatch }, topMenuId) {
+      return new Promise(resolve => {
+        getRoutes(topMenuId, {
+          sysType: website.sysType
+        }).then(res => {
+          const data = res.data.data;
+          let menu = deepClone(data);
+          menu.forEach(ele => {
+            addPath(ele, true);
+          });
+          commit("SET_MENU", menu);
+          dispatch("GetButtons");
+          resolve(menu);
+        });
+      });
+    }
   },
+  mutations: {
+    SET_TOKEN: (state, token) => {
+      setToken(token);
+      state.token = token;
+      setStore({ name: "token", content: state.token, type: "session" });
+    },
+    SET_MENU_ID(state, menuId) {
+      state.menuId = menuId;
+      setStore({ name: "menuId", content: state.menuId, type: "session" });
+    },
+    SET_MENU_ALL: (state, menuAll) => {
+      state.menuAll = menuAll;
+      setStore({ name: "menuAll", content: state.menuAll, type: "session" });
+    },
+    SET_REFRESH_TOKEN: (state, refreshToken) => {
+      setRefreshToken(refreshToken);
+      state.refreshToken = refreshToken;
+      setStore({
+        name: "refreshToken",
+        content: state.refreshToken,
+        type: "session"
+      });
+    },
+    SET_TENANT_ID: (state, tenantId) => {
+      state.tenantId = tenantId;
+      setStore({ name: "tenantId", content: state.tenantId, type: "session" });
+    },
+    SET_USER_INFO: (state, userInfo) => {
+      state.userInfo = userInfo;
+      setStore({ name: "userInfo", content: state.userInfo });
+    },
+    SET_MENU: (state, menu) => {
+      state.menu = menu;
+      let menuAll = state.menuAll;
+      if (!validatenull(menu)) {
+        const obj = menuAll.filter(ele => ele.path === menu[0].path)[0];
+        if (!obj) {
+          menuAll = menuAll.concat(menu);
+          state.menuAll = menuAll;
+        }
+        setStore({ name: "menuAll", content: menuAll, type: "session" });
+      }
+      setStore({ name: "menu", content: state.menu, type: "session" });
+    },
+    SET_ROLES: (state, roles) => {
+      state.roles = roles;
+    },
+    SET_PERMISSION: (state, permission) => {
+      let result = [];
 
-  // user logout
-  logout({ commit, state, dispatch }) {
-    return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
-        commit('SET_TOKEN', '')
-        commit('SET_ROLES', [])
-        removeToken()
-        resetRouter()
+      function getCode(list) {
+        list.forEach(ele => {
+          if (typeof ele === "object") {
+            const chiildren = ele.children;
+            const code = ele.code;
+            if (chiildren) {
+              getCode(chiildren);
+            } else {
+              result.push(code);
+            }
+          }
+        });
+      }
 
-        // reset visited views and cached views
-        // to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2485
-        dispatch('tagsView/delAllViews', null, { root: true })
-
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
-  },
-
-  // remove token
-  resetToken({ commit }) {
-    return new Promise(resolve => {
-      commit('SET_TOKEN', '')
-      commit('SET_ROLES', [])
-      removeToken()
-      resolve()
-    })
-  },
-
-  // dynamically modify permissions
-  changeRoles({ commit, dispatch }, role) {
-    return new Promise(async resolve => {
-      const token = role + '-token'
-
-      commit('SET_TOKEN', token)
-      setToken(token)
-
-      const { roles } = await dispatch('getInfo')
-
-      resetRouter()
-
-      // generate accessible routes map based on roles
-      const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true })
-
-      // dynamically add accessible routes
-      router.addRoutes(accessRoutes)
-
-      // reset visited views and cached views
-      dispatch('tagsView/delAllViews', null, { root: true })
-
-      resolve()
-    })
+      getCode(permission);
+      state.permission = {};
+      result.forEach(ele => {
+        state.permission[ele] = true;
+      });
+      setStore({
+        name: "permission",
+        content: state.permission,
+        type: "session"
+      });
+    }
   }
-}
-
-export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions
-}
+};
+export default user;

@@ -1,53 +1,55 @@
-import Vue from 'vue'
+import Vue from "vue";
+// import Avue from "@smallwei/avue";
+// import "@smallwei/avue/lib/index.css";
+import axios from "./router/axios";
+import VueAxios from "vue-axios";
+import App from "./App";
+import router from "./router/router";
+import "./permission"; // 权限
+import "./error"; // 日志
+import "./cache"; //页面缓存
+import store from "./store";
+import { loadStyle } from "./util/util";
+import * as urls from "@/config/env";
+import Element from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+import { iconfontUrl, iconfontVersion } from "@/config/env";
+import i18n from "./lang"; // Internationalization
+import "./styles/common.scss";
+import basicBlock from "./components/basic-block/main";
+import basicContainer from "./components/basic-container/main";
+import pagination from "./components/pagination/index";
+import { vaildData } from "./util/validate.js";
 
-import Cookies from 'js-cookie'
-
-import 'normalize.css/normalize.css' // a modern alternative to CSS resets
-
-import Element from 'element-ui'
-import './styles/element-variables.scss'
-import enLang from 'element-ui/lib/locale/lang/en'// 如果使用中文语言包请默认支持，无需额外引入，请删除该依赖
-
-import '@/styles/index.scss' // global css
-
-import App from './App'
-import store from './store'
-import router from './router'
-
-import './icons' // icon
-import './permission' // permission control
-import './utils/error-log' // error log
-
-import * as filters from './filters' // global filters
-
-/**
- * If you don't want to use mock-server
- * you want to use MockJs for mock api
- * you can execute: mockXHR()
- *
- * Currently MockJs will be used in the production environment,
- * please remove it before going online ! ! !
- */
-if (process.env.NODE_ENV === 'production') {
-  const { mockXHR } = require('../mock')
-  mockXHR()
-}
-
+Vue.use(router);
+Vue.use(VueAxios, axios);
 Vue.use(Element, {
-  size: Cookies.get('size') || 'medium', // set element-ui default size
-  locale: enLang // 如果使用中文，无需设置，请删除
-})
+  i18n: (key, value) => i18n.t(key, value)
+});
+// Vue.use(Avue, {
+//   i18n: (key, value) => i18n.t(key, value)
+// });
+//注册全局容器
+Vue.component("basicContainer", basicContainer);
+Vue.component("basicBlock", basicBlock);
+Vue.component("pagination", pagination);
+// 加载相关url地址
+Object.keys(urls).forEach(key => {
+  Vue.prototype[key] = urls[key];
+});
 
-// register global utility filters
-Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key])
-})
+// 动态加载阿里云字体库
+iconfontVersion.forEach(ele => {
+  loadStyle(iconfontUrl.replace("$key", ele));
+});
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+Vue.prototype.vaildData = vaildData;
 
 new Vue({
-  el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App)
-})
+}).$mount("#app");
