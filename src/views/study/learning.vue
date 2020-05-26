@@ -1,193 +1,112 @@
 <template>
   <basic-container>
-    <el-tabs type="border-card">
-      <el-tab-pane label="听力（7）">
-        <div class="top">
-          <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="1"
-                      border>听力测试试题1</el-radio>
-          </div>
-          <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="2"
-                      border>听力测试试题2</el-radio>
-          </div>
-          <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="3"
-                      border>听力测试试题3</el-radio>
-          </div>
-          <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="4"
-                      border>听力测试试题4</el-radio>
-          </div>
-          <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="5"
-                      border>听力测试试题5</el-radio>
-          </div>
-          <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="6"
-                      border>听力测试试题6</el-radio>
-          </div>
-          <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="7"
-                      border>听力测试试题7</el-radio>
-          </div>
-          <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="8"
-                      border>听力测试试题8</el-radio>
-          </div>
-          <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="9"
-                      border>听力测试试题9</el-radio>
-          </div>
-        </div>
-        <div class="content">
-          <el-table :data="data"
+    <el-row></el-row>
+    <el-row>
+      <el-col :span="12">
+        
+         <el-table :data="data"
                     ref="crud"
-                    :header-cell-style="{
-        color: '#333',
-        fontWeight: 700,
-        background: '#f5f5f5'
-      }"
+                    :header-cell-style="styleCss"
                     border
                     lazy
                     align="left">
 
-            <!-- 航信编号	 -->
-            <el-table-column align="left"
-                             label="试题">
+            <el-table-column align="center"
+                             label="Words">
               <template>
-                <div class="list">
-                  <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="1"
-                              border>听力测试试题1</el-radio>
-                  </div>
-                  <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="2"
-                              border>听力测试试题2</el-radio>
-                  </div>
-                  <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="3"
-                              border>听力测试试题3</el-radio>
-                  </div>
-                  <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="4"
-                              border>听力测试试题4</el-radio>
-                  </div>
-                  <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="5"
-                              border>听力测试试题5</el-radio>
-                  </div>
-                  <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="6"
-                              border>听力测试试题6</el-radio>
-                  </div>
-                  <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="7"
-                              border>听力测试试题7</el-radio>
-                  </div>
-                  <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="8"
-                              border>听力测试试题8</el-radio>
-                  </div>
-                  <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="9"
-                              border>听力测试试题9</el-radio>
-                  </div>
+                <div class="listLeft">
+                  <el-table :data="listLeft"
+                    ref="crud"
+                    :show-header="styleCssLeft"
+                    highlight-current-row
+                   @row-click = "btn"
+                    border
+                    lazy
+                    align="left">
+                    <el-table-column slot-scope="scope" align="center">
+                      <template>
+                        <span>1</span>
+                      </template>
+                    </el-table-column>
+                  </el-table>
                 </div>
               </template>
             </el-table-column>
           </el-table>
-        </div>
-
-        <!-- 立即开始 -->
-        <el-row>
-          <el-col :span="24"
-                  class="btnCls">
-            <el-button type="primary"
-                       icon="el-icon-edit">立即开始</el-button>
-
-          </el-col>
-        </el-row>
-
-      </el-tab-pane>
-      <el-tab-pane label="阅读TOEFL (2)">配置管理</el-tab-pane>
-    </el-tabs>
+      </el-col>
+      <el-col :span="12">
+         <el-table :data="data"
+                    ref="crud"
+                     :header-cell-style="styleCss"
+                    border
+                    lazy
+                    align="left">
+            <el-table-column align="center"
+                             label="Detail">
+              <template>
+                <div class="listLeft">
+                  
+                </div>
+              </template>
+            </el-table-column>
+          </el-table>
+      </el-col>
+    </el-row>
+    <el-row></el-row>
   </basic-container>
 </template>
 
 <script>
 export default {
-  name: "DashboardAdmin",
+  name: "studyLearning",
   components: {},
   data () {
     return {
-      data: [1],
-      radio1: "1",
-      radio2: "2",
-      radio3: "3",
-      radio4: "4",
-      radio5: "5",
-      radio6: "6",
-      radio7: "7",
-      radio8: "8",
-      radio9: "9"
+      flag:false,
+      data:[1],
+     styleCss:{
+        color: '#333',
+        fontWeight: 700,
+        background: '#f5f5f5'
+      },
+      listLeft:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26],
+      styleCssLeft:false,
     };
   },
-  methods: {}
+  methods: {
+
+    btn(row,col,event){
+         console.log(row) 
+         console.log(col)
+         console.log(event)
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-.top {
+.list{
   width: 100%;
-  display: flex;
-  align-items: center;
-  // justify-content: space-between;
-  flex-wrap: wrap;
-  .topRadio {
-    // width: 100px;
-    margin-top: 10px;
-    margin-right: 16px;
-  }
+  box-sizing: border-box;
+  height: calc(100vh - 400px);
 }
-.content {
-  margin-top: 30px;
-  .list {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    // justify-content: space-between;
-    flex-wrap: wrap;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    .topRadio {
-      // width: 100px;
-      margin-top: 20px;
-      margin-right: 16px;
-    }
+</style>
+
+<style lang="scss">
+.listLeft{
+  height: calc(100vh - 500px);
+  overflow: auto;
+  /* 用来设置当前页面element全局table 选中某行时的背景色*/
+  .el-table__body tr.current-row>td{
+    background-color: #409EFF !important;
+    /* color: #f19944; */  /* 设置文字颜色，可以选择不设置 */
+  }
+  /* 用来设置当前页面element全局table 鼠标移入某行时的背景色*/
+  .el-table--enable-row-hover .el-table__body tr:hover>td {
+    background-color: #409EFF;
+    /* color: #f19944; */ /* 设置文字颜色，可以选择不设置 */
   }
 }
 
-.btnCls {
-  text-align: center;
-  margin-top: 40px;
-}
+
 </style>
