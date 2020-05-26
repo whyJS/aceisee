@@ -1,15 +1,11 @@
 /**
- * 全局配置文件AW
+ * AW全局配置文件
  */
 export default {
   title: "ACEiSEE-WORD",
   logo: "AW",
-  sysType: "4", //渠道类型，目前用于获取该渠道菜单和权限
   key: "saber", //配置主键,目前用于存储
   indexTitle: "ACEiSEE-WORD",
-  clientId: "saber", // 客户端id
-  clientSecret: "saber_secret", // 客户端密钥
-  tenantMode: true, // 是否开启租户模式
   lockPage: "/lock",
   tokenTime: 3000,
   //http的status默认放行不才用统一处理的,
@@ -35,7 +31,5 @@ export default {
       icon: "source",
       children: "children"
     }
-  },
-  // 流程设计器地址
-  flowDesignUrl: "http://localhost:9999"
+  }
 };

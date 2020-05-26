@@ -142,7 +142,7 @@
 
 <script>
 import selectTree from "@/components/selectTree/index.vue";
-import selectIcon from "@/components/selectIcon/index.vue";
+// import selectIcon from "@/components/selectIcon/index.vue";
 const defaultForm = {
   name: "", // 菜单名称
   path: "", // 路由地址
@@ -161,8 +161,8 @@ import { getRuleRequired } from "@/util/validator";
 export default {
   // name: ,
   components: {
-    "select-tree": selectTree,
-    "select-icon": selectIcon
+    "select-tree": selectTree
+    // "select-icon": selectTree
   },
   computed: {
     iconClass() {

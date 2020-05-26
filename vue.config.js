@@ -3,7 +3,6 @@ module.exports = {
   publicPath: "/",
   lintOnSave: true,
   productionSourceMap: false,
-  chainWebpack: config => {},
   devServer: {
     port: 1888,
     proxy: {
