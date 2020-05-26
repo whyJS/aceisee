@@ -1,19 +1,19 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import user from './modules/user'
-import common from './modules/common'
-import tags from './modules/tags'
+import Vue from "vue";
+import Vuex from "vuex";
+import user from "./modules/user";
+import common from "./modules/common";
+import tags from "./modules/tags";
 
-import getters from './getters'
+import getters from "./getters";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 const store = new Vuex.Store({
   modules: {
     user,
     common,
-    tags,
+    tags
   },
-  getters,
-})
+  getters
+});
 
-export default store
+export default store;

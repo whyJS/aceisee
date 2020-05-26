@@ -4,7 +4,7 @@ import VueAxios from "vue-axios";
 import App from "./App";
 import router from "./router/router";
 import "./permission"; // 权限
-import "./error"; // 日志
+// import "./error"; // 日志
 import "./cache"; //页面缓存
 import store from "./store";
 // import { loadStyle } from "./util/util";

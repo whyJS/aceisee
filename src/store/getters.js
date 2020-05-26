@@ -7,7 +7,8 @@ const getters = {
   themeName: state => state.common.themeName,
   isShade: state => state.common.isShade,
   isCollapse: state => state.common.isCollapse,
-  keyCollapse: (state, getters) => getters.screen > 1 ? getters.isCollapse : false,
+  keyCollapse: (state, getters) =>
+    getters.screen > 1 ? getters.isCollapse : false,
   screen: state => state.common.screen,
   isLock: state => state.common.isLock,
   isFullScren: state => state.common.isFullScren,
@@ -21,10 +22,10 @@ const getters = {
   menu: state => state.user.menu,
   menuId: state => state.user.menuId,
   menuAll: state => state.user.menuAll,
-  logsList: state => state.logs.logsList,
-  logsLen: state => state.logs.logsList.length || 0,
-  logsFlag: (state, getters) => getters.logsLen === 0,
+  // logsList: state => state.logs.logsList,
+  // logsLen: state => state.logs.logsList.length || 0,
+  // logsFlag: (state, getters) => getters.logsLen === 0,
   flowRoutes: state => state.dict.flowRoutes,
   menuList: state => state.user.menuList
-}
-export default getters
+};
+export default getters;

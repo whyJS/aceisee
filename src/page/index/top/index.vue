@@ -13,10 +13,9 @@
       <div class="top-bar__item top-bar__item--show" v-if="showMenu">
         <top-menu ref="topMenu"></top-menu>
       </div>
-      
     </div>
     <div class="top-bar__right">
-      <!-- <el-tooltip
+      <el-tooltip
         v-if="showColor"
         effect="dark"
         :content="$t('navbar.color')"
@@ -57,12 +56,12 @@
       >
         <div class="top-bar__item">
           <i
-          style="font-size:20px;font-weight:blod"
+            style="font-size:20px;font-weight:blod"
             :class="isFullScren ? 'el-icon-full-screen' : 'el-icon-full-screen'"
             @click="handleScreen"
           ></i>
         </div>
-      </el-tooltip> -->
+      </el-tooltip>
       <img
         class="top-bar__img"
         style="background:#409EFF;"
@@ -100,7 +99,7 @@ import topMenu from "./top-menu";
 import topTheme from "./top-theme";
 // import topLogs from "./top-logs";
 import topColor from "./top-color";
-import topNotice from "./top-notice";
+// import topNotice from "./top-notice";
 // import topLang from "./top-lang";
 
 export default {
@@ -110,8 +109,8 @@ export default {
     // topSearch,
     topTheme,
     // topLogs,
-    topColor,
-    topNotice,
+    topColor
+    // topNotice
     // topLang
   },
   name: "top",

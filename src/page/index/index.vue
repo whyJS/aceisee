@@ -32,7 +32,7 @@
 <script>
 import { mapGetters } from "vuex";
 import tags from "./tags";
-import search from "./search";
+// import search from "./search";
 import top from "./top/";
 import sidebar from "./sidebar/";
 import admin from "@/util/admin";
@@ -44,7 +44,7 @@ export default {
   components: {
     top,
     tags,
-    search,
+    // search,
     sidebar
   },
   name: "index",
