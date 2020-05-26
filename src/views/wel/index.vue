@@ -1,7 +1,7 @@
 <template>
   <div>
     <basic-container>
-      <div class="wrapper">欢迎光临，账户中心</div>
+      <div class="wrapper">欢迎光临，ACEiSEE-WORD</div>
     </basic-container>
   </div>
 </template>

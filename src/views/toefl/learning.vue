@@ -122,6 +122,7 @@
           <el-col :span="24"
                   class="btnCls">
             <el-button type="primary"
+            @click="study()"
                        icon="el-icon-edit">立即开始</el-button>
 
           </el-col>
@@ -151,7 +152,11 @@ export default {
       radio9: "9"
     };
   },
-  methods: {}
+  methods: {
+    study(){
+      this.$router.push('/study/learning')
+    }
+  }
 };
 </script>
 

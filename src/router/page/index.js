@@ -89,6 +89,25 @@ export default [
   },
 
   {
+    path: "/study",
+    component: Layout,
+    name: "study",
+    source: "el-icon-s-grid",
+    redirect: "/study/learning",
+    children: [
+      {
+        path: "/study/learning",
+        name: "learning",
+        meta: {
+          isTab:false
+        },
+        component: () =>
+          import(/* webpackChunkName: "views" */ "@/views/study/learning")
+      }
+    ]
+  },
+
+  {
     path: "/info",
     component: Layout,
     redirect: "/info/index",
