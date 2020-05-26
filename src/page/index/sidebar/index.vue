@@ -38,18 +38,10 @@ export default {
     return {};
   },
   created() {
-    this.index.openMenu(this.menuId);
+    this.index.openMenu();
   },
   computed: {
-    ...mapGetters([
-      "website",
-      "menu",
-      "tag",
-      "keyCollapse",
-      "screen",
-      "menuId",
-      "menuList"
-    ]),
+    ...mapGetters(["website", "tag", "keyCollapse", "screen", "menuList"]),
     nowTagValue: function() {
       return this.$router.$aceiseeRouter.getValue(this.$route);
     }
