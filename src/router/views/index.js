@@ -7,35 +7,35 @@ export default [
     component: Layout,
     redirect: "/toefl/learning",
     name: "TOEFL",
-    source: "el-icon-s-grid",
+    source: "el-icon-s-data",
     meta: {},
     children: [
       {
         path: "/toefl/learning",
         component: () => import("@/views/toefl/learning.vue"),
         name: "Learning",
-        source: "el-icon-s-grid",
+        source: "el-icon-folder-add",
         meta: {}
       },
       {
         path: "/toefl/exercise",
         component: () => import("@/views/toefl/exercise.vue"),
         name: "Exercise",
-        source: "el-icon-s-grid",
+        source: "el-icon-folder-remove",
         meta: {}
       },
       {
         path: "/toefl/test",
         component: () => import("@/views/toefl/test.vue"),
         name: "Test",
-        source: "el-icon-s-grid",
+        source: "el-icon-folder-delete",
         meta: {}
       },
       {
         path: "/toefl/wordbook",
         component: () => import("@/views/toefl/wordbook.vue"),
         name: "Word Book",
-        source: "el-icon-s-grid",
+        source: "el-icon-folder-checked",
         meta: {}
       }
     ]
@@ -47,35 +47,35 @@ export default [
     component: Layout,
     redirect: "/sat/learning",
     name: "SAT",
-    source: "el-icon-s-grid",
+    source: "el-icon-menu",
     meta: {},
     children: [
       {
         path: "/sat/learning",
         component: () => import("@/views/sat/learning.vue"),
         name: "Learning",
-        source: "el-icon-s-grid",
+        source: "el-icon-folder-add",
         meta: {}
       },
       {
         path: "/sat/exercise",
         component: () => import("@/views/sat/exercise.vue"),
         name: "Exercise",
-        source: "el-icon-s-grid",
+        source: "el-icon-folder-remove",
         meta: {}
       },
       {
         path: "/sat/test",
         component: () => import("@/views/sat/test.vue"),
         name: "Test",
-        source: "el-icon-s-grid",
+        source: "el-icon-folder-delete",
         meta: {}
       },
       {
         path: "/sat/wordbook",
         component: () => import("@/views/sat/wordbook.vue"),
         name: "Word Book",
-        source: "el-icon-s-grid",
+        source: "el-icon-folder-checked",
         meta: {}
       }
     ]
@@ -94,28 +94,28 @@ export default [
         path: "/ssat/learning",
         component: () => import("@/views/ssat/learning.vue"),
         name: "Learning",
-        source: "el-icon-s-grid",
+        source: "el-icon-folder-add",
         meta: {}
       },
       {
         path: "/ssat/exercise",
         component: () => import("@/views/ssat/exercise.vue"),
         name: "Exercise",
-        source: "el-icon-s-grid",
+        source: "el-icon-folder-remove",
         meta: {}
       },
       {
         path: "/ssat/test",
         component: () => import("@/views/ssat/test.vue"),
         name: "Test",
-        source: "el-icon-s-grid",
+        source: "el-icon-folder-delete",
         meta: {}
       },
       {
         path: "/ssat/wordbook",
         component: () => import("@/views/ssat/wordbook.vue"),
         name: "Word Book",
-        source: "el-icon-s-grid",
+        source: "el-icon-folder-checked",
         meta: {}
       }
     ]

@@ -65,12 +65,12 @@
       <img
         class="top-bar__img"
         style="background:#409EFF;"
-        :src="userInfo.avatar || logoImg"
+        src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80"
       />
       <el-dropdown>
         <span class="el-dropdown-link">
           {{ userInfo.userName }}
-          <i class="el-icon-arrow-down el-icon--right"></i>
+          <i class="el-icon-caret-bottom"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
