@@ -24,10 +24,10 @@ export const rulePwd = {
   message: "密码格式有误（至少包含字母和数字，长度6-16位）"
 };
 
-export const ruleEmail = {
-  pattern: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
-  message: "请输入正确的邮箱地址"
-};
+// export const ruleEmail = {
+//   pattern: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
+//   message: "请输入正确的邮箱地址"
+// };
 
 export const ruleAccount = {
   pattern: /^(?![0-9]+$)?(?![a-zA-Z]+$)?[0-9A-Za-z]{1,30}$/,

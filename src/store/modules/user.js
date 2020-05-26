@@ -1,45 +1,11 @@
-import {
-  setToken,
-  setRefreshToken,
-  removeToken
-} from "@/util/auth";
-import { Message } from "element-ui";
+import { setToken, setRefreshToken, removeToken } from "@/util/auth";
+// import { Message } from "element-ui";
 import { setStore, getStore } from "@/util/store";
-import { isURL, validatenull } from "@/util/validate";
-import { deepClone } from "@/util/util";
-import website from "@/config/website";
-import {
-  loginByUsername,
-  getUserInfo,
-  refreshToken,
-  getButtons
-} from "@/api/user";
-import { getTopMenu, getRoutes } from "@/api/system/menu";
+import { validatenull } from "@/util/validate";
+
+// import { loginByUsername } from "@/api/user";
 
 import ViewsRouter from "@/router/views/"; // 页面路由
-
-function addPath(ele, first) {
-  const menu = website.menu;
-  const propsConfig = menu.props;
-  const propsDefault = {
-    label: propsConfig.label || "name",
-    path: propsConfig.path || "path",
-    icon: propsConfig.icon || "icon",
-    children: propsConfig.children || "children"
-  };
-  const icon = ele[propsDefault.icon];
-  ele[propsDefault.icon] = validatenull(icon) ? menu.iconDefault : icon;
-  const isChild =
-    ele[propsDefault.children] && ele[propsDefault.children].length !== 0;
-  if (!isChild) ele[propsDefault.children] = [];
-  if (!isChild && first && !isURL(ele[propsDefault.path])) {
-    ele[propsDefault.path] = ele[propsDefault.path] + "/index";
-  } else {
-    ele[propsDefault.children].forEach(child => {
-      addPath(child);
-    });
-  }
-}
 
 const user = {
   state: {
@@ -52,12 +18,12 @@ const user = {
     menuAll: getStore({ name: "menuAll" }) || [],
     token: getStore({ name: "token" }) || "",
     refreshToken: getStore({ name: "refreshToken" }) || "",
-    menuList:ViewsRouter
+    menuList: ViewsRouter
   },
   actions: {
     //根据用户名登录
     LoginByUsername({ commit }) {
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         setTimeout(() => {
           commit("SET_TOKEN", "这是测试token");
           commit("SET_REFRESH_TOKEN", "这是测试token");
@@ -71,26 +37,24 @@ const user = {
       });
     },
 
-
     // 登出
     LogOut({ commit }) {
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         setTimeout(() => {
           commit("SET_TOKEN", "");
-            commit("SET_MENU", []);
-            commit("SET_MENU_ID", {});
-            commit("SET_MENU_ALL", []);
-            commit("SET_ROLES", []);
-            commit("DEL_ALL_TAG");
-            commit("CLEAR_LOCK");
-            removeToken();
-            window.localStorage.clear()
-            window.sessionStorage.clear()
-            resolve();
-
+          commit("SET_MENU", []);
+          commit("SET_MENU_ID", {});
+          commit("SET_MENU_ALL", []);
+          commit("SET_ROLES", []);
+          commit("DEL_ALL_TAG");
+          commit("CLEAR_LOCK");
+          removeToken();
+          window.localStorage.clear();
+          window.sessionStorage.clear();
+          resolve();
         }, 10);
       });
-    },
+    }
   },
   mutations: {
     SET_TOKEN: (state, token) => {
