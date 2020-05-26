@@ -1,56 +1,13 @@
 export default {
   tip: "提示",
-  title: "中航信用 账户中心",
+  title: "ACEiSEE-WORD",
   logoutTip: "退出系统, 是否继续?",
   submitText: "确定",
   cancelText: "取消",
   search: "请输入搜索内容",
   menuTip: "没有发现菜单",
-  wel: {
-    info: "早安，Smallwei，aceiseex一款超乎你想象的框架！",
-    dept: "我是aceisee团队下的一个部门-哈皮部门-哈皮职位",
-    team: "团队内排名",
-    project: "项目访问",
-    count: "项目数",
-    data: {
-      subtitle: "实时",
-      column1: "分类统计",
-      column2: "附件统计",
-      column3: "文章统计",
-      key1: "分",
-      key2: "附",
-      key3: "评",
-      text1: "当前分类总记录数",
-      text2: "当前上传的附件数",
-      text3: "评论次数"
-    },
-    data2: {
-      column1: "今日注册",
-      column2: "今日登录",
-      column3: "今日订阅",
-      column4: "今日评论"
-    },
-    data3: {
-      column1: "转化率（日同比 28%）",
-      column2: "签到率（日同比 11%）",
-      column3: "签到率（日同比 11%）"
-    },
-    data4: {
-      column1: "错误日志",
-      column2: "数据展示",
-      column3: "权限管理",
-      column4: "用户管理"
-    },
-    table: {
-      rw: "工作任务",
-      nr: "工作内容",
-      sj: "工作时间"
-    }
-  },
   route: {
     info: "个人信息",
-    website: "goldnetx官网",
-    aceiseexwebsite: "aceiseex官网",
     dashboard: "首页",
     more: "更多",
     tags: "标签",
@@ -67,8 +24,6 @@ export default {
   },
   login: {
     title: "登录 ",
-    info: "goldnetX 企业级开发平台",
-    tenantId: "请输入租户ID",
     username: "请输入账号",
     password: "请输入密码",
     wechat: "微信",

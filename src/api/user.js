@@ -1,44 +1,19 @@
 import request from "@/router/axios";
 
-export const loginByUsername = (
-  tenantId,
-  username,
-  password,
-  type,
-  key,
-  code
-) =>
+export const loginByUsername = () =>
   request({
-    url: "/api/goldnet-auth/oauth/token",
+    url: "",
     method: "post",
-    headers: {
-      "Tenant-Id": tenantId,
-      "Captcha-Key": key,
-      "Captcha-Code": code
-    },
-    params: {
-      tenantId,
-      username,
-      password,
-      grant_type: "captcha",
-      scope: "all",
-      type
-    }
+    headers: {},
+    params: {}
   });
 
-export const refreshToken = (refresh_token, tenantId) =>
+export const refreshToken = () =>
   request({
-    url: "/api/goldnet-auth/oauth/token",
+    url: "",
     method: "post",
-    headers: {
-      "Tenant-Id": tenantId
-    },
-    params: {
-      tenantId,
-      refresh_token,
-      grant_type: "refresh_token",
-      scope: "all"
-    }
+    headers: {},
+    params: {}
   });
 
 export const getButtons = params => {

@@ -1,52 +1,11 @@
 export default {
-  title: "aceisee is a framework",
+  title: "ACEiSEE-WORD",
   tip: "tip",
   logoutTip: "Exit the system, do you want to continue?",
   submitText: "submit",
   cancelText: "cancel",
   search: "Please input search content",
   menuTip: "none menu list",
-  wel: {
-    info: "Good morning, Smallwei, aceiseex is a framework",
-    dept: "a certain technology department",
-    team: "Team ranking",
-    project: "Project access",
-    count: "Item number",
-    data: {
-      subtitle: "real time",
-      column1: "Classified statistics",
-      column2: "Annex statistics",
-      column3: "Article statistics",
-      key1: "C",
-      key2: "A",
-      key3: "A",
-      text1: "Total Record Number of Classifications",
-      text2: "Number of attachments Uploaded",
-      text3: "Comment frequency"
-    },
-    data2: {
-      column1: "Registration today",
-      column2: "Login today",
-      column3: "Subscription today",
-      column4: "Todays review"
-    },
-    data3: {
-      column1: "Conversion rate（Day 28%）",
-      column2: "Attendance rate（Day 11%）",
-      column3: "Attendance rate（Day 33%）"
-    },
-    data4: {
-      column1: "Error log",
-      column2: "Data display",
-      column3: "Privilege management",
-      column4: "user management"
-    },
-    table: {
-      rw: "Work Tasks",
-      nr: "Work content",
-      sj: "Working hours"
-    }
-  },
   route: {
     info: "info",
     website: "website",
@@ -68,7 +27,6 @@ export default {
   login: {
     title: "Login ",
     info: "Enterprise Development Platform",
-    tenantId: "Please input tenantId",
     username: "Please input username",
     password: "Please input a password",
     wechat: "Wechat",

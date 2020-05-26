@@ -1,5 +1,4 @@
 const getters = {
-  tag: state => state.tags.tag,
   language: state => state.common.language,
   website: state => state.common.website,
   userInfo: state => state.user.userInfo,
@@ -14,18 +13,19 @@ const getters = {
   isFullScren: state => state.common.isFullScren,
   isMenu: state => state.common.isMenu,
   lockPasswd: state => state.common.lockPasswd,
+
+  tag: state => state.tags.tag,
   tagList: state => state.tags.tagList,
   tagWel: state => state.tags.tagWel,
+
   token: state => state.user.token,
-  roles: state => state.user.roles,
-  permission: state => state.user.permission,
   menu: state => state.user.menu,
   menuId: state => state.user.menuId,
-  menuAll: state => state.user.menuAll,
+  // menuAll: state => state.user.menuAll,
   // logsList: state => state.logs.logsList,
   // logsLen: state => state.logs.logsList.length || 0,
   // logsFlag: (state, getters) => getters.logsLen === 0,
-  flowRoutes: state => state.dict.flowRoutes,
+  // flowRoutes: state => state.dict.flowRoutes,
   menuList: state => state.user.menuList
 };
 export default getters;

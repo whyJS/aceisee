@@ -2,7 +2,7 @@
   <div class="menu-wrapper">
     <template v-for="item in menu">
       <el-menu-item
-        v-if="validatenull(item[childrenKey]) && vaildRoles(item)"
+        v-if="validatenull(item[childrenKey])"
         :index="item[pathKey]"
         @click="open(item)"
         :key="item[labelKey]"
@@ -12,7 +12,7 @@
         <span slot="title" :alt="item[pathKey]">{{ generateTitle(item) }}</span>
       </el-menu-item>
       <el-submenu
-        v-else-if="!validatenull(item[childrenKey]) && vaildRoles(item)"
+        v-else-if="!validatenull(item[childrenKey])"
         :index="item[pathKey]"
         :key="item[labelKey]"
       >
@@ -49,7 +49,6 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
 import { validatenull } from "@/util/validate";
 import config from "./config.js";
 
@@ -83,10 +82,9 @@ export default {
   },
   created() {},
   mounted() {
-    console.log(this.menu)
+    console.log(this.menu);
   },
   computed: {
-    ...mapGetters(["roles"]),
     labelKey() {
       return this.props.label || this.config.propsDefault.label;
     },
@@ -116,10 +114,6 @@ export default {
       );
       return this.nowTagValue === item[this.pathKey] || groupFlag;
     },
-    vaildRoles(item) {
-      item.meta = item.meta || {};
-      return item.meta.roles ? item.meta.roles.includes(this.roles) : true;
-    },
     validatenull(val) {
       return validatenull(val);
     },
@@ -127,7 +121,9 @@ export default {
       if (this.screen <= 1) this.$store.commit("SET_COLLAPSE");
       this.$router.$aceiseeRouter.group = item.group;
       this.$router.$aceiseeRouter.meta = item.meta;
-      this.$router.push(item.path).catch(err => {err});
+      this.$router.push(item.path).catch(err => {
+        err;
+      });
     }
   }
 };

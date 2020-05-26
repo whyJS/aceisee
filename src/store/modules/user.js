@@ -9,13 +9,11 @@ import ViewsRouter from "@/router/views/"; // 页面路由
 
 const user = {
   state: {
-    tenantId: getStore({ name: "tenantId" }) || "",
     userInfo: getStore({ name: "userInfo" }) || [],
-    permission: getStore({ name: "permission" }) || {},
-    roles: [],
+
     menu: getStore({ name: "menu" }) || [],
     menuId: getStore({ name: "menuId" }) || [],
-    menuAll: getStore({ name: "menuAll" }) || [],
+    // menuAll: getStore({ name: "menuAll" }) || [],
     token: getStore({ name: "token" }) || "",
     refreshToken: getStore({ name: "refreshToken" }) || "",
     menuList: ViewsRouter
@@ -45,7 +43,6 @@ const user = {
           commit("SET_MENU", []);
           commit("SET_MENU_ID", {});
           commit("SET_MENU_ALL", []);
-          commit("SET_ROLES", []);
           commit("DEL_ALL_TAG");
           commit("CLEAR_LOCK");
           removeToken();
@@ -79,10 +76,6 @@ const user = {
         type: "session"
       });
     },
-    SET_TENANT_ID: (state, tenantId) => {
-      state.tenantId = tenantId;
-      setStore({ name: "tenantId", content: state.tenantId, type: "session" });
-    },
     SET_USER_INFO: (state, userInfo) => {
       state.userInfo = userInfo;
       setStore({ name: "userInfo", content: state.userInfo });
@@ -99,37 +92,6 @@ const user = {
         setStore({ name: "menuAll", content: menuAll, type: "session" });
       }
       setStore({ name: "menu", content: state.menu, type: "session" });
-    },
-    SET_ROLES: (state, roles) => {
-      state.roles = roles;
-    },
-    SET_PERMISSION: (state, permission) => {
-      let result = [];
-
-      function getCode(list) {
-        list.forEach(ele => {
-          if (typeof ele === "object") {
-            const chiildren = ele.children;
-            const code = ele.code;
-            if (chiildren) {
-              getCode(chiildren);
-            } else {
-              result.push(code);
-            }
-          }
-        });
-      }
-
-      getCode(permission);
-      state.permission = {};
-      result.forEach(ele => {
-        state.permission[ele] = true;
-      });
-      setStore({
-        name: "permission",
-        content: state.permission,
-        type: "session"
-      });
     }
   }
 };
