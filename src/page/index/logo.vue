@@ -1,14 +1,17 @@
 <template>
   <div class="aceisee-logo">
     <transition name="fade">
-      <span v-if="keyCollapse" class="aceisee-logo_subtitle" key="0">
+      <span v-if="keyCollapse"
+            class="aceisee-logo_subtitle"
+            key="0">
         {{ website.logo }}
       </span>
     </transition>
     <transition-group name="fade">
       <template v-if="!keyCollapse">
-        <span class="aceisee-logo_title" key="1"
-          >{{ website.indexTitle }}
+        <span style="font-weight:700;"
+              class="aceisee-logo_title"
+              key="1">{{ website.indexTitle }}
         </span>
       </template>
     </transition-group>
@@ -19,10 +22,10 @@
 import { mapGetters } from "vuex";
 export default {
   name: "logo",
-  data() {
+  data () {
     return {};
   },
-  created() {},
+  created () { },
   computed: {
     ...mapGetters(["website", "keyCollapse"])
   },

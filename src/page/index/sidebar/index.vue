@@ -2,23 +2,20 @@
   <div class="aceisee-sidebar">
     <logo></logo>
     <el-scrollbar style="height:100%">
-      <div v-if="validatenull(menuList)" class="aceisee-sidebar--tip">
+      <div v-if="validatenull(menuList)"
+           class="aceisee-sidebar--tip">
         {{ $t("menuTip") }}
       </div>
-      <el-menu
-        unique-opened
-        :default-active="nowTagValue"
-        mode="vertical"
-        :show-timeout="200"
-        :collapse="keyCollapse"
-      >
-        <sidebar-item
-          :menu="menuList"
-          :screen="screen"
-          first
-          :props="website.menu.props"
-          :collapse="keyCollapse"
-        ></sidebar-item>
+      <el-menu unique-opened
+               :default-active="nowTagValue"
+               mode="vertical"
+               :show-timeout="200"
+               :collapse="keyCollapse">
+        <sidebar-item :menu="menuList"
+                      :screen="screen"
+                      first
+                      :props="website.menu.props"
+                      :collapse="keyCollapse"></sidebar-item>
       </el-menu>
     </el-scrollbar>
   </div>
@@ -34,21 +31,21 @@ export default {
   name: "sidebar",
   components: { sidebarItem, logo },
   inject: ["index"],
-  data() {
+  data () {
     return {};
   },
-  created() {
-    this.index.openMenu();
+  created () {
+
   },
   computed: {
     ...mapGetters(["website", "tag", "keyCollapse", "screen", "menuList"]),
-    nowTagValue: function() {
+    nowTagValue: function () {
       return this.$router.$aceiseeRouter.getValue(this.$route);
     }
   },
-  mounted() {},
+  mounted () { },
   methods: {
-    validatenull(val) {
+    validatenull (val) {
       return validatenull(val);
     }
   }

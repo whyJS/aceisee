@@ -1,5 +1,6 @@
 <template>
-  <div class="aceisee-contail" :class="{ 'aceisee--collapse': isCollapse }">
+  <div class="aceisee-contail"
+       :class="{ 'aceisee--collapse': isCollapse }">
     <div class="aceisee-header">
       <!-- 顶部导航栏 -->
       <top ref="top" />
@@ -13,32 +14,29 @@
         <!-- 顶部标签卡 -->
         <tags />
         <!-- 主体视图层 -->
-        <div
-          style="height:100%;overflow-y:auto;overflow-x:hidden;"
-          id="aceisee-view"
-          v-show="!isSearch"
-        >
+        <div style="height:100%;overflow-y:auto;overflow-x:hidden;"
+             id="aceisee-view"
+             v-show="!isSearch">
           <keep-alive>
-            <router-view class="aceisee-view" v-if="$route.meta.$keepAlive" />
+            <router-view class="aceisee-view"
+                         v-if="$route.meta.$keepAlive" />
           </keep-alive>
-          <router-view class="aceisee-view" v-if="!$route.meta.$keepAlive" />
+          <router-view class="aceisee-view"
+                       v-if="!$route.meta.$keepAlive" />
         </div>
       </div>
     </div>
-    <div class="aceisee-shade" @click="showCollapse"></div>
+    <div class="aceisee-shade"
+         @click="showCollapse"></div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import tags from "./tags";
-// import search from "./search";
 import top from "./top/";
 import sidebar from "./sidebar/";
 import admin from "@/util/admin";
-// import { validatenull } from "@/util/validate";
-// import { calcDate } from "@/util/date.js";
-// import { getStore } from "@/util/store.js";
 
 export default {
   components: {
@@ -48,12 +46,12 @@ export default {
     sidebar
   },
   name: "index",
-  provide() {
+  provide () {
     return {
       index: this
     };
   },
-  data() {
+  data () {
     return {
       //搜索控制
       isSearch: false,
@@ -63,18 +61,18 @@ export default {
       refreshTime: ""
     };
   },
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.init();
   },
   computed: mapGetters(["isMenu", "isLock", "isCollapse", "website"]),
   props: [],
   methods: {
-    showCollapse() {
+    showCollapse () {
       this.$store.commit("SET_COLLAPSE");
     },
     // 初始化
-    init() {
+    init () {
       this.$store.commit("SET_SCREEN", admin.getScreen());
       window.onresize = () => {
         setTimeout(() => {
@@ -84,10 +82,7 @@ export default {
       // this.$store.dispatch("FlowRoutes").then(() => {
       // });
     },
-    //打开菜单
-    openMenu() {
-      console.log("xxxx");
-    }
+
   }
 };
 </script>

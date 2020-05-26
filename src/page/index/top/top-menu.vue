@@ -1,35 +1,50 @@
 <template>
   <div class="top-menu">
-    <el-menu :default-active="activeIndex" mode="horizontal" text-color="#333">
-      <el-menu-item index="0" @click.native="openHome(itemHome)" key="0">
+    <el-menu :default-active="activeIndex+''"
+             mode="horizontal"
+             text-color="#333">
+      <el-menu-item :index="item.url"
+                    v-for="(item,i) in list"
+                    @click.native="openHome(item,i)"
+                    :key="i">
         <template slot="title">
-          <i :class="itemHome.source"></i>
-          <span>{{ generateTitle(itemHome) }}</span>
+          <i :class="item.source"
+             style="font-size:16px;"></i>
+          <span>{{ generateTitle(item) }}</span>
         </template>
       </el-menu-item>
-      <template v-for="(item, index) in items">
-        <el-menu-item
-          :index="item.id + ''"
-          @click.native="openMenu(item)"
-          :key="index + 'xx'"
-        >
-          <template slot="title">
-            <i :class="item.source" style="padding-right: 5px;"></i>
-            <span>{{ generateTitle(item) }}</span>
-          </template>
-        </el-menu-item>
-      </template>
     </el-menu>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   name: "top-menu",
-  data() {
+  data () {
     return {
+      list: [
+        {
+          name: "首页",
+          source: "el-icon-s-shop",
+          url: "/wel/index"
+        },
+        {
+          name: "TOEFL",
+          source: "el-icon-s-data",
+          url: "/toefl/learning"
+        },
+        {
+          name: "SAT",
+          source: "el-icon-menu",
+          url: "/sat/learning"
+        },
+        {
+          name: "SSAT",
+          source: "el-icon-s-grid",
+          url: "/ssat/learning"
+        },
+      ],
+
       itemHome: {
         name: "首页",
         source: "el-icon-menu"
@@ -39,31 +54,21 @@ export default {
     };
   },
   inject: ["index"],
-  created() {
-    this.getMenu();
+  created () {
+
   },
   computed: {
-    ...mapGetters(["tagCurrent", "menu"])
+
   },
   methods: {
-    openHome(itemHome) {
-      this.index.openMenu(itemHome);
-      this.$router.push({
-        path: this.$router.$aceiseeRouter.getPath(
-          { name: itemHome.name, src: "" },
-          {}
-        )
+    openHome (item, i) {
+
+      this.$router.push(item.url).catch(err => {
+        err;
       });
+      this.activeIndex = i
     },
-    openMenu(item) {
-      this.index.openMenu(item);
-    },
-    getMenu() {
-      // this.$store.dispatch("GetTopMenu").then(res => {
-      //   this.items = res;
-      // });
-    },
-    generateTitle(item) {
+    generateTitle (item) {
       return this.$router.$aceiseeRouter.generateTitle(
         item.name,
         (item.meta || {}).i18n

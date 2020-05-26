@@ -13,28 +13,28 @@ export default [
       {
         path: "/toefl/learning",
         component: () => import("@/views/toefl/learning.vue"),
-        name: "Learning",
+        name: "TOEFL Learning",
         source: "el-icon-folder-add",
         meta: {}
       },
       {
         path: "/toefl/exercise",
         component: () => import("@/views/toefl/exercise.vue"),
-        name: "Exercise",
+        name: "TOEFL Exercise",
         source: "el-icon-folder-remove",
         meta: {}
       },
       {
         path: "/toefl/test",
         component: () => import("@/views/toefl/test.vue"),
-        name: "Test",
+        name: "TOEFL Test",
         source: "el-icon-folder-delete",
         meta: {}
       },
       {
         path: "/toefl/wordbook",
         component: () => import("@/views/toefl/wordbook.vue"),
-        name: "Word Book",
+        name: "TOEFL Word-Book",
         source: "el-icon-folder-checked",
         meta: {}
       }
@@ -53,28 +53,28 @@ export default [
       {
         path: "/sat/learning",
         component: () => import("@/views/sat/learning.vue"),
-        name: "Learning",
+        name: "SAT Learning",
         source: "el-icon-folder-add",
         meta: {}
       },
       {
         path: "/sat/exercise",
         component: () => import("@/views/sat/exercise.vue"),
-        name: "Exercise",
+        name: "SAT Exercise",
         source: "el-icon-folder-remove",
         meta: {}
       },
       {
         path: "/sat/test",
         component: () => import("@/views/sat/test.vue"),
-        name: "Test",
+        name: "SAT Test",
         source: "el-icon-folder-delete",
         meta: {}
       },
       {
         path: "/sat/wordbook",
         component: () => import("@/views/sat/wordbook.vue"),
-        name: "Word Book",
+        name: "SAT Word-Book",
         source: "el-icon-folder-checked",
         meta: {}
       }
@@ -93,28 +93,28 @@ export default [
       {
         path: "/ssat/learning",
         component: () => import("@/views/ssat/learning.vue"),
-        name: "Learning",
+        name: "SSAT Learning",
         source: "el-icon-folder-add",
         meta: {}
       },
       {
         path: "/ssat/exercise",
         component: () => import("@/views/ssat/exercise.vue"),
-        name: "Exercise",
+        name: "SSAT Exercise",
         source: "el-icon-folder-remove",
         meta: {}
       },
       {
         path: "/ssat/test",
         component: () => import("@/views/ssat/test.vue"),
-        name: "Test",
+        name: "SSAT Test",
         source: "el-icon-folder-delete",
         meta: {}
       },
       {
         path: "/ssat/wordbook",
         component: () => import("@/views/ssat/wordbook.vue"),
-        name: "Word Book",
+        name: "SSAT Word-Book",
         source: "el-icon-folder-checked",
         meta: {}
       }
