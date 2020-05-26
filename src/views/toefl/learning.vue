@@ -1,6 +1,5 @@
 <template>
-  <div class="dashboard-editor-container">
-    <!-- <div class="huanying">欢迎光临，ACEiSEE-WORD</div> -->
+  <basic-container>
     <el-tabs type="border-card">
       <el-tab-pane label="听力（7）">
         <div>
@@ -10,28 +9,23 @@
       </el-tab-pane>
       <el-tab-pane label="阅读TOEFL (2)">配置管理</el-tab-pane>
     </el-tabs>
-  </div>
+  </basic-container>
 </template>
 
 <script>
-
 export default {
-  name: 'DashboardAdmin',
-  components: {
-
-  },
+  name: "DashboardAdmin",
+  components: {},
   data() {
     return {
-      radio1: '1',
-      radio2: '1',
-      radio3: '1',
-      radio4: '1'
-    }
+      radio1: "1",
+      radio2: "1",
+      radio3: "1",
+      radio4: "1"
+    };
   },
-  methods: {
-
-  }
-}
+  methods: {}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -39,17 +33,16 @@ export default {
   padding: 32px;
   background-color: #fff;
   position: relative;
-  .huanying{
+  .huanying {
     width: 100%;
     text-align: center;
     font-size: 60px;
     font-weight: bold;
     padding-top: 100px;
   }
-
 }
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
   .chart-wrapper {
     padding: 8px;
   }
