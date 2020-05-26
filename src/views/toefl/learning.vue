@@ -117,6 +117,16 @@
           </el-table>
         </div>
 
+        <!-- 立即开始 -->
+        <el-row>
+          <el-col :span="24"
+                  class="btnCls">
+            <el-button type="primary"
+                       icon="el-icon-edit">立即开始</el-button>
+
+          </el-col>
+        </el-row>
+
       </el-tab-pane>
       <el-tab-pane label="阅读TOEFL (2)">配置管理</el-tab-pane>
     </el-tabs>
@@ -174,5 +184,10 @@ export default {
       margin-right: 16px;
     }
   }
+}
+
+.btnCls {
+  text-align: center;
+  margin-top: 40px;
 }
 </style>
