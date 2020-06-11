@@ -2,167 +2,16 @@
   <basic-container>
     <el-row style="padding-bottom:20px;">
       <el-button icon="el-icon-arrow-left" type="primary">返回</el-button>
-      <el-button type="warning" v-show="learning" icon="el-icon-edit" @click="learning = !learning">Test</el-button>
-      <el-button type="warning" v-show="!learning" icon="el-icon-edit" @click="learning = !learning">Learning
-      </el-button>
     </el-row>
-    <el-row v-show="learning" :gutter="20">
-      <el-col :span="12">
 
-        <el-table :data="data" ref="crud" :header-cell-style="styleCss" border lazy align="left">
-
-          <el-table-column align="center" label="Words">
-            <template>
-              <div class="listLeft">
-                <el-table :data="listLeft" ref="crud" :show-header="styleCssLeft" highlight-current-row @row-click="btn"
-                  border lazy align="left">
-                  <el-table-column align="center">
-                    <template slot-scope="scope">
-                      <div class="leftItem">{{scope.row.text}}</div>
-                    </template>
-                  </el-table-column>
-                </el-table>
-              </div>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-col>
-      <el-col :span="12">
-        <el-table :data="data" ref="crud" :header-cell-style="styleCss" border lazy align="left">
-          <el-table-column align="center" label="Detail">
-            <template>
-              <div class="listRight">
-                <table width="100%" class="table" align="center" cellspacing="0" cellpadding="0">
-                  <caption class="tableheader">学生成绩表
-                  </caption>
-
-                  <tbody style="width：100%">
-                    <tr align="center">
-                      <td>小明</td>
-                      <td>89</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小红</td>
-                      <td>96</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                    <tr align="center">
-                      <td>小明</td>
-                      <td>89</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小红</td>
-                      <td>96</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                    <tr align="center">
-                      <td>小明</td>
-                      <td>89</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小红</td>
-                      <td>96</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                    <tr align="center">
-                      <td>小明</td>
-                      <td>89</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小红</td>
-                      <td>96</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                    <tr align="center">
-                      <td>小明</td>
-                      <td>89</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小红</td>
-                      <td>96</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-col>
-    </el-row>
-    <el-row class="top" v-show="!learning">
+    <el-row class="top">
       <div class="item" v-for="(val,index) in trueList" :key="index">
         <el-button v-if="val" type="success" icon="el-icon-check" circle></el-button>
         <el-button v-else type="danger" icon="el-icon-close" circle></el-button>
       </div>
 
     </el-row>
-    <el-row v-show="!learning">
+    <el-row>
       <div class="testlist">
         <diV class="testlistHeader">
           <h1>这是单词</h1>

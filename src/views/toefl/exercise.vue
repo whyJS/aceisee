@@ -4,112 +4,70 @@
       <el-tab-pane label="听力（7）">
         <div class="top">
           <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="1"
-                      border>听力测试试题1</el-radio>
+            <el-radio v-model="radio1" label="1" border>听力测试试题1</el-radio>
           </div>
           <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="2"
-                      border>听力测试试题2</el-radio>
+            <el-radio v-model="radio1" label="2" border>听力测试试题2</el-radio>
           </div>
           <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="3"
-                      border>听力测试试题3</el-radio>
+            <el-radio v-model="radio1" label="3" border>听力测试试题3</el-radio>
           </div>
           <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="4"
-                      border>听力测试试题4</el-radio>
+            <el-radio v-model="radio1" label="4" border>听力测试试题4</el-radio>
           </div>
           <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="5"
-                      border>听力测试试题5</el-radio>
+            <el-radio v-model="radio1" label="5" border>听力测试试题5</el-radio>
           </div>
           <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="6"
-                      border>听力测试试题6</el-radio>
+            <el-radio v-model="radio1" label="6" border>听力测试试题6</el-radio>
           </div>
           <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="7"
-                      border>听力测试试题7</el-radio>
+            <el-radio v-model="radio1" label="7" border>听力测试试题7</el-radio>
           </div>
           <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="8"
-                      border>听力测试试题8</el-radio>
+            <el-radio v-model="radio1" label="8" border>听力测试试题8</el-radio>
           </div>
           <div class="topRadio">
-            <el-radio v-model="radio1"
-                      label="9"
-                      border>听力测试试题9</el-radio>
+            <el-radio v-model="radio1" label="9" border>听力测试试题9</el-radio>
           </div>
         </div>
         <div class="content">
-          <el-table :data="data"
-                    ref="crud"
-                    :header-cell-style="{
+          <el-table :data="data" ref="crud" :header-cell-style="{
         color: '#333',
         fontWeight: 700,
         background: '#f5f5f5'
-      }"
-                    border
-                    lazy
-                    align="left">
+      }" border lazy align="left">
 
             <!-- 航信编号	 -->
-            <el-table-column align="left"
-                             label="试题">
+            <el-table-column align="left" label="试题">
               <template>
                 <div class="list">
                   <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="1"
-                              border>听力测试试题1</el-radio>
+                    <el-radio v-model="radio1" label="1" border>听力测试试题1</el-radio>
                   </div>
                   <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="2"
-                              border>听力测试试题2</el-radio>
+                    <el-radio v-model="radio1" label="2" border>听力测试试题2</el-radio>
                   </div>
                   <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="3"
-                              border>听力测试试题3</el-radio>
+                    <el-radio v-model="radio1" label="3" border>听力测试试题3</el-radio>
                   </div>
                   <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="4"
-                              border>听力测试试题4</el-radio>
+                    <el-radio v-model="radio1" label="4" border>听力测试试题4</el-radio>
                   </div>
                   <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="5"
-                              border>听力测试试题5</el-radio>
+                    <el-radio v-model="radio1" label="5" border>听力测试试题5</el-radio>
                   </div>
                   <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="6"
-                              border>听力测试试题6</el-radio>
+                    <el-radio v-model="radio1" label="6" border>听力测试试题6</el-radio>
                   </div>
                   <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="7"
-                              border>听力测试试题7</el-radio>
+                    <el-radio v-model="radio1" label="7" border>听力测试试题7</el-radio>
                   </div>
                   <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="8"
-                              border>听力测试试题8</el-radio>
+                    <el-radio v-model="radio1" label="8" border>听力测试试题8</el-radio>
                   </div>
                   <div class="topRadio">
-                    <el-radio v-model="radio1"
-                              label="9"
-                              border>听力测试试题9</el-radio>
+                    <el-radio v-model="radio1" label="9" border>听力测试试题9</el-radio>
                   </div>
                 </div>
               </template>
@@ -119,10 +77,8 @@
 
         <!-- 立即开始 -->
         <el-row>
-          <el-col :span="24"
-                  class="btnCls">
-            <el-button type="primary"
-                       icon="el-icon-edit">立即开始</el-button>
+          <el-col :span="24" class="btnCls">
+            <el-button type="primary" @click="study()" icon="el-icon-edit">立即开始</el-button>
 
           </el-col>
         </el-row>
@@ -151,7 +107,11 @@ export default {
       radio9: "9"
     };
   },
-  methods: {}
+  methods: {
+    study () {
+      this.$router.push('/study/exercise')
+    }
+  }
 };
 </script>
 

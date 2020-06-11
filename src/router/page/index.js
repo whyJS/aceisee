@@ -99,10 +99,37 @@ export default [
         path: "/study/learning",
         name: "learning",
         meta: {
-          isTab:false
+          isTab: false
         },
         component: () =>
           import(/* webpackChunkName: "views" */ "@/views/study/learning")
+      },
+      {
+        path: "/study/test",
+        name: "test",
+        meta: {
+          isTab: false
+        },
+        component: () =>
+          import(/* webpackChunkName: "views" */ "@/views/study/test")
+      },
+      {
+        path: "/study/word",
+        name: "word",
+        meta: {
+          isTab: false
+        },
+        component: () =>
+          import(/* webpackChunkName: "views" */ "@/views/study/word")
+      },
+      {
+        path: "/study/exercise",
+        name: "exercise",
+        meta: {
+          isTab: false
+        },
+        component: () =>
+          import(/* webpackChunkName: "views" */ "@/views/study/exercise")
       }
     ]
   },
