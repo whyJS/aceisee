@@ -4,7 +4,7 @@
        ref="login">
     <top-color v-show="false" />
     <div class="login-weaper animated bounceInDown">
-      <div class="login-left">
+      <!-- <div class="login-left">
         <div class="login-time">
           {{time}}
         </div>
@@ -12,7 +12,7 @@
              src="./logo.png"
              alt="">
         <p class="title">中航信用 账户中心</p>
-      </div>
+      </div> -->
       <div class="login-border">
         <div class="login-main">
           <h4 class="login-title">
@@ -20,7 +20,7 @@
 
           </h4>
           <userLogin />
-          
+
         </div>
 
       </div>

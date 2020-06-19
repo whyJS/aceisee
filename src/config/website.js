@@ -4,7 +4,7 @@
 export default {
   title: "ACEiSEE-WORD",
   logo: "AW",
-  key: "saber", //配置主键,目前用于存储
+  key: "web", //配置主键,目前用于存储
   indexTitle: "ACEiSEE-WORD",
   lockPage: "/lock",
   tokenTime: 3000,
