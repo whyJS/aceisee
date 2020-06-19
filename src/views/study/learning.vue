@@ -1,21 +1,55 @@
 <template>
   <basic-container>
     <el-row style="padding-bottom:20px;">
-      <el-button icon="el-icon-arrow-left" type="primary">返回</el-button>
-      <el-button type="warning" v-show="learning" icon="el-icon-edit" @click="learning = !learning">Test</el-button>
-      <el-button type="warning" v-show="!learning" icon="el-icon-edit" @click="learning = !learning">Learning
+      <el-button icon="el-icon-arrow-left"
+                 type="primary">返回</el-button>
+      <el-button type="warning"
+                 v-show="learning"
+                 icon="el-icon-edit"
+                 @click="learning = !learning">Test</el-button>
+      <el-button type="warning"
+                 v-show="!learning"
+                 icon="el-icon-edit"
+                 @click="learning = !learning">Learning
       </el-button>
     </el-row>
-    <el-row v-show="learning" :gutter="20">
+    <el-row>
+      <el-select v-model="search"
+                 filterable
+                 placeholder="请选择">
+        <el-option v-for="(item,index) in listLeft"
+                   :key="index"
+                   :label="item.text"
+                   :value="item.id">
+        </el-option>
+      </el-select>
+    </el-row>
+
+    <el-row v-show="learning"
+            :gutter="20">
       <el-col :span="12">
 
-        <el-table :data="data" ref="crud" :header-cell-style="styleCss" border lazy align="left">
+        <el-table :data="data"
+                  ref="crud"
+                  :header-cell-style="styleCss"
+                  border
+                  lazy
+                  align="left">
 
-          <el-table-column align="center" label="Words">
+          <el-table-column align="center"
+                           label="Words">
             <template>
+
               <div class="listLeft">
-                <el-table :data="listLeft" ref="crud" :show-header="styleCssLeft" highlight-current-row @row-click="btn"
-                  border lazy align="left">
+
+                <el-table :data="listLeft"
+                          ref="crud"
+                          :show-header="styleCssLeft"
+                          highlight-current-row
+                          @row-click="btn"
+                          border
+                          lazy
+                          align="left">
                   <el-table-column align="center">
                     <template slot-scope="scope">
                       <div class="leftItem">{{scope.row.text}}</div>
@@ -28,11 +62,21 @@
         </el-table>
       </el-col>
       <el-col :span="12">
-        <el-table :data="data" ref="crud" :header-cell-style="styleCss" border lazy align="left">
-          <el-table-column align="center" label="Detail">
+        <el-table :data="data"
+                  ref="crud"
+                  :header-cell-style="styleCss"
+                  border
+                  lazy
+                  align="left">
+          <el-table-column align="center"
+                           label="Detail">
             <template>
               <div class="listRight">
-                <table width="100%" class="table" align="center" cellspacing="0" cellpadding="0">
+                <table width="100%"
+                       class="table"
+                       align="center"
+                       cellspacing="0"
+                       cellpadding="0">
                   <caption class="tableheader">学生成绩表
                   </caption>
 
@@ -155,14 +199,24 @@
         </el-table>
       </el-col>
     </el-row>
-    <el-row class="top" v-show="!learning">
-      <div class="item" v-for="(val,index) in trueList" :key="index">
-        <el-button v-if="val" type="success" icon="el-icon-check" circle></el-button>
-        <el-button v-else type="danger" icon="el-icon-close" circle></el-button>
+    <el-row class="top"
+            v-show="!learning">
+      <div class="item"
+           v-for="(val,index) in trueList"
+           :key="index">
+        <el-button v-if="val"
+                   type="success"
+                   icon="el-icon-check"
+                   circle></el-button>
+        <el-button v-else
+                   type="danger"
+                   icon="el-icon-close"
+                   circle></el-button>
       </div>
 
     </el-row>
-    <el-row v-show="!learning">
+    <el-row style="min-height:368px;"
+            v-show="!learning">
       <div class="testlist">
         <diV class="testlistHeader">
           <h1>这是单词</h1>
@@ -174,8 +228,9 @@
                 <table class="ans werTable">
                   <tbody>
                     <tr>
-                      <td><input style="width:30px;height:30px;border:2px solid #8f8f8f;" type="checkbox"
-                          onclick="doAnswer(this,false,null,11906)"></td>
+                      <td><input style="width:30px;height:30px;border:2px solid #8f8f8f;"
+                               type="checkbox"
+                               onclick="doAnswer(this,false,null,11906)"></td>
                       <td class="questionTD">开花；发育，成熟；繁荣</td>
                     </tr>
                   </tbody>
@@ -187,8 +242,9 @@
                 <table class="ans werTable">
                   <tbody>
                     <tr>
-                      <td><input style="width:30px;height:30px;border:2px solid #8f8f8f;" type="checkbox"
-                          onclick="doAnswer(this,true,null,11906)"></td>
+                      <td><input style="width:30px;height:30px;border:2px solid #8f8f8f;"
+                               type="checkbox"
+                               onclick="doAnswer(this,true,null,11906)"></td>
                       <td class="questionTD">g</td>
                     </tr>
                   </tbody>
@@ -200,8 +256,9 @@
                 <table class="ans werTable">
                   <tbody>
                     <tr>
-                      <td><input style="width:30px;height:30px;border:2px solid #8f8f8f;" type="checkbox"
-                          onclick="doAnswer(this,false,null,11906)"></td>
+                      <td><input style="width:30px;height:30px;border:2px solid #8f8f8f;"
+                               type="checkbox"
+                               onclick="doAnswer(this,false,null,11906)"></td>
                       <td class="questionTD">撒胡椒粉；大量给予</td>
                     </tr>
                   </tbody>
@@ -213,8 +270,9 @@
                 <table class="ans werTable">
                   <tbody>
                     <tr>
-                      <td><input style="width:30px;height:30px;border:2px solid #8f8f8f;" type="checkbox"
-                          onclick="doAnswer(this,false,null,11906)"></td>
+                      <td><input style="width:30px;height:30px;border:2px solid #8f8f8f;"
+                               type="checkbox"
+                               onclick="doAnswer(this,false,null,11906)"></td>
                       <td class="questionTD">行星</td>
                     </tr>
                   </tbody>
@@ -244,9 +302,9 @@ export default {
       },
       listLeft: [
         { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
+        { text: '2' },
+        { text: '3' },
+        { text: '4' },
         { text: '1' },
         { text: '1' },
         { text: '1' },
@@ -269,7 +327,9 @@ export default {
       ],
       styleCssLeft: false,
 
-      trueList: [false, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true]
+      trueList: [false, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true],
+
+      search: ''
     };
   },
   methods: {
@@ -331,6 +391,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   height: calc(100vh - 400px);
+  min-height: 368px;
   border: 1px dashed #333;
   .testlistHeader {
     width: 100%;
