@@ -8,8 +8,8 @@ import axios from "axios";
 import store from "@/store/";
 import router from "@/router/router";
 import { getToken } from "@/util/auth";
-import { Message } from "element-ui";
-import website from "@/config/website";
+import { Message, MessageBox } from "element-ui";
+// import website from "@/config/website";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
@@ -18,7 +18,7 @@ axios.defaults.timeout = 10000;
 //baseURL
 // axios.defaults.baseURL = process.env.VUE_APP_BASE_API;
 //返回其他状态码
-axios.defaults.validateStatus = function(status) {
+axios.defaults.validateStatus = function (status) {
   return status >= 200 && status <= 500;
 };
 //跨域请求，允许保存cookie
@@ -49,24 +49,48 @@ axios.interceptors.response.use(
   res => {
     //关闭 progress bar
     NProgress.done();
-    //获取状态码
-    const status = res.data.code || res.status;
-    const statusWhiteList = website.statusWhiteList || [];
-    const message = res.data.msg || "未知错误";
-    //如果在白名单里则自行catch逻辑处理
-    if (statusWhiteList.includes(status)) return Promise.reject(res);
-    //如果是401则跳转到登录页面
-    if (status === 401)
-      store.dispatch("FedLogOut").then(() => router.push({ path: "/login" }));
-    // 如果请求为非200否者默认统一处理
-    if (status !== 200) {
+    // //获取状态码
+    // const status = res.data.code || res.status;
+    // const statusWhiteList = website.statusWhiteList || [];
+    // const message = res.data.msg || "未知错误";
+    // //如果在白名单里则自行catch逻辑处理
+    // if (statusWhiteList.includes(status)) return Promise.reject(res);
+    // //如果是401则跳转到登录页面
+    // if (status === 401)
+    //   store.dispatch("FedLogOut").then(() => router.push({ path: "/login" }));
+    // // 如果请求为非200否者默认统一处理
+    // if (status !== 200) {
+    //   Message({
+    //     message: message,
+    //     type: "error"
+    //   });
+    //   return Promise.reject(new Error(message));
+    // }
+    // return res;
+
+    if (res.result != 200) {
       Message({
-        message: message,
-        type: "error"
-      });
-      return Promise.reject(new Error(message));
+        message: res.msg || 'Error',
+        type: 'error',
+        duration: 5 * 1000
+      })
+
+      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
+      if (res.result == -999) {
+        // to re-login
+        MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
+          confirmButtonText: 'Re-Login',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }).then(() => {
+          store.dispatch("FedLogOut").then(() => router.push({ path: "/login" }));
+        })
+      }
+      return Promise.reject(new Error(res.message || 'Error'))
+    } else {
+      return res
     }
-    return res;
+
   },
   error => {
     NProgress.done();
