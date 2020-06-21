@@ -8,13 +8,13 @@ import website from '@/config/website'
 const common = {
 
   state: {
-    language: getStore({name: 'language'}) || 'zh',
+    language: getStore({ name: 'language' }) || 'zh',
     isCollapse: false,
     isFullScren: false,
     isMenu: true,
     isShade: false,
     screen: -1,
-    isLock: getStore({name: 'isLock'}) || false,
+    isLock: getStore({ name: 'isLock' }) || false,
     showTag: true,
     showDebug: true,
     showCollapse: true,
@@ -24,9 +24,9 @@ const common = {
     showTheme: true,
     showMenu: true,
     showColor: true,
-    colorName: getStore({name: 'colorName'}) || '#409EFF',
-    themeName: getStore({name: 'themeName'}) || 'theme-default',
-    lockPasswd: getStore({name: 'lockPasswd'}) || '',
+    colorName: getStore({ name: 'colorName' }) || '#409EFF',
+    themeName: getStore({ name: 'themeName' }) || 'theme-star',
+    lockPasswd: getStore({ name: 'lockPasswd' }) || '',
     website: website,
   },
   mutations: {
