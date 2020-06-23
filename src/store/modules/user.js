@@ -2,7 +2,7 @@ import { setToken, removeToken } from "@/util/auth";
 // import { Message } from "element-ui";
 import { setStore, getStore } from "@/util/store";
 
-// import { loginByUsername } from "@/api/user";
+import { login } from "@/api/user";
 
 import ViewsRouter from "@/router/views/"; // 页面路由
 
@@ -13,23 +13,28 @@ const user = {
     menuList: ViewsRouter
   },
   actions: {
+
     //根据用户名登录
-    LoginByUsername({ commit }) {
-      return new Promise(resolve => {
-        setTimeout(() => {
-          commit("SET_TOKEN", "这是测试token");
-          commit("SET_REFRESH_TOKEN", "这是测试token");
-          commit("SET_USER_INFO", {});
+    LoginByUsername ({ commit }, userInfo) {
+      const { username, password } = userInfo
+      return new Promise((resolve, reject) => {
+        login({ username: username.trim(), pwd: password }).then(response => {
+          const { data } = response.data
+          commit("SET_TOKEN", data.token);
+          commit("SET_USER_INFO", data);
           commit("DEL_ALL_TAG");
           commit("CLEAR_LOCK");
 
           resolve();
-        }, 10);
-      });
+        }).catch(error => {
+          reject(error)
+        })
+      })
+
     },
 
     // 登出
-    LogOut({ commit }) {
+    LogOut ({ commit }) {
       return new Promise(resolve => {
         setTimeout(() => {
           commit("SET_TOKEN", "");

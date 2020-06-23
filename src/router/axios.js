@@ -16,7 +16,7 @@ import "nprogress/nprogress.css";
 //默认超时时间
 axios.defaults.timeout = 10000;
 //baseURL
-// axios.defaults.baseURL = process.env.VUE_APP_BASE_API;
+axios.defaults.baseURL = process.env.VUE_APP_BASE_API;
 //返回其他状态码
 axios.defaults.validateStatus = function (status) {
   return status >= 200 && status <= 500;
@@ -36,7 +36,7 @@ axios.interceptors.request.use(
     const isToken = meta.isToken === false;
     if (getToken() && !isToken) {
       //让每个请求携带token--['Authorization']为自定义key 请根据实际情况自行修改
-      config.headers["GoldNet-Auth"] = "bearer " + getToken();
+      config.headers['aceisee-pfuser-ticket'] = getToken()
     }
     return config;
   },
@@ -67,8 +67,9 @@ axios.interceptors.response.use(
     //   return Promise.reject(new Error(message));
     // }
     // return res;
+    console.log(res)
 
-    if (res.result != 200) {
+    if (res.data.result != 200) {
       Message({
         message: res.msg || 'Error',
         type: 'error',
@@ -86,7 +87,7 @@ axios.interceptors.response.use(
           store.dispatch("FedLogOut").then(() => router.push({ path: "/login" }));
         })
       }
-      return Promise.reject(new Error(res.message || 'Error'))
+      return res
     } else {
       return res
     }

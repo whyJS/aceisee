@@ -12,7 +12,7 @@ import i18n from "./lang"; // Internationalization
 import "./styles/common.scss";
 import basicBlock from "./components/basic-block/main";
 import basicContainer from "./components/basic-container/main";
-import pagination from "./components/pagination/index";
+import pagination from "./components/Pagination/index";
 import { vaildData } from "./util/validate.js";
 
 Vue.use(router);

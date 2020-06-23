@@ -1,48 +1,22 @@
 <template>
-  <el-form
-    class="login-form"
-    status-icon
-    :rules="loginRules"
-    ref="loginForm"
-    :model="loginForm"
-    label-width="0"
-  >
+  <el-form class="login-form" status-icon :rules="loginRules" ref="loginForm" :model="loginForm" label-width="0">
     <el-form-item prop="username">
-      <el-input
-        size="small"
-        @keyup.enter.native="handleLogin"
-        v-model="loginForm.username"
-        auto-complete="off"
-        :placeholder="$t('login.username')"
-      >
+      <el-input size="small" @keyup.enter.native="handleLogin" v-model="loginForm.username" auto-complete="off"
+        :placeholder="$t('login.username')">
         <i slot="prefix" class="el-icon-user" />
       </el-input>
     </el-form-item>
     <el-form-item prop="pass">
-      <el-input
-        size="small"
-        @keyup.enter.native="handleLogin"
-        :type="passwordType"
-        v-model="loginForm.pass"
-        auto-complete="off"
-        :placeholder="$t('login.password')"
-      >
-        <i
-          class="el-icon-view el-input__icon"
-          slot="suffix"
-          @click="showPassword"
-        />
+      <el-input size="small" @keyup.enter.native="handleLogin" :type="passwordType" v-model="loginForm.pass"
+        auto-complete="off" :placeholder="$t('login.password')">
+        <i class="el-icon-view el-input__icon" slot="suffix" @click="showPassword" />
         <i slot="prefix" class="el-icon-lock" />
       </el-input>
     </el-form-item>
     <el-form-item> </el-form-item>
     <el-form-item>
-      <el-button
-        type="primary"
-        size="small"
-        @click.native.prevent="handleLogin"
-        class="login-submit"
-        >{{ $t("login.submit") }}
+      <el-button type="primary" size="small" @click.native.prevent="handleLogin" class="login-submit">
+        {{ $t("login.submit") }}
       </el-button>
     </el-form-item>
   </el-form>
@@ -54,7 +28,7 @@ import website from "@/config/website";
 
 export default {
   name: "userlogin",
-  data() {
+  data () {
     return {
       tenantMode: website.tenantMode,
       loginForm: {
@@ -76,19 +50,19 @@ export default {
       passwordType: "password"
     };
   },
-  created() {},
-  mounted() {},
+  created () { },
+  mounted () { },
   computed: {
     ...mapGetters(["tagWel"])
   },
   props: [],
   methods: {
-    showPassword() {
+    showPassword () {
       this.passwordType === ""
         ? (this.passwordType = "password")
         : (this.passwordType = "");
     },
-    handleLogin() {
+    handleLogin () {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           const loading = this.$loading({
@@ -106,7 +80,7 @@ export default {
             })
             .catch(() => {
               loading.close();
-              this.refreshCode();
+
             });
         }
       });

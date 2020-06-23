@@ -8,7 +8,7 @@ module.exports = {
     proxy: {
       "/api": {
         //本地服务接口地址
-        target: "http://47.93.102.80:8001", //测试
+        target: "http://platform.guozunfugui.com/aceisee", //测试
         // target: "http://192.168.2.9:8001", //刘玉宝
         // target: "http://192.168.2.161:8001", //乔鹏
         // target: "http://192.168.2.42:8001",
