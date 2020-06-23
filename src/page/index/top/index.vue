@@ -1,72 +1,60 @@
 <template>
   <div class="aceisee-top">
     <div class="top-bar__left">
-      <div
-        class="aceisee-breadcrumb"
-        :class="[{ 'aceisee-breadcrumb--active': isCollapse }]"
-        v-if="showCollapse"
-      >
-        <i class="el-icon-s-unfold" @click="setCollapse"></i>
+      <div class="aceisee-breadcrumb"
+           :class="[{ 'aceisee-breadcrumb--active': isCollapse }]"
+           v-if="showCollapse">
+        <i class="el-icon-s-unfold"
+           @click="setCollapse"></i>
       </div>
     </div>
     <div class="top-bar__title">
-      <div class="top-bar__item top-bar__item--show" v-if="showMenu">
+      <div class="top-bar__item top-bar__item--show"
+           v-if="showMenu">
         <top-menu ref="topMenu"></top-menu>
       </div>
     </div>
     <div class="top-bar__right">
-      <el-tooltip
-        v-if="showColor"
-        effect="dark"
-        :content="$t('navbar.color')"
-        placement="bottom"
-      >
+      <el-tooltip v-if="showColor"
+                  effect="dark"
+                  :content="$t('navbar.color')"
+                  placement="bottom">
         <div class="top-bar__item">
           <top-color></top-color>
         </div>
       </el-tooltip>
 
-      <el-tooltip
-        v-if="showLock"
-        effect="dark"
-        :content="$t('navbar.lock')"
-        placement="bottom"
-      >
+      <el-tooltip v-if="showLock"
+                  effect="dark"
+                  :content="$t('navbar.lock')"
+                  placement="bottom">
         <div class="top-bar__item">
           <top-lock></top-lock>
         </div>
       </el-tooltip>
-      <el-tooltip
-        v-if="showTheme"
-        effect="dark"
-        :content="$t('navbar.theme')"
-        placement="bottom"
-      >
+      <el-tooltip v-if="showTheme"
+                  effect="dark"
+                  :content="$t('navbar.theme')"
+                  placement="bottom">
         <div class="top-bar__item top-bar__item--show">
           <top-theme></top-theme>
         </div>
       </el-tooltip>
-      <el-tooltip
-        v-if="showFullScren"
-        effect="dark"
-        :content="
+      <el-tooltip v-if="showFullScren"
+                  effect="dark"
+                  :content="
           isFullScren ? $t('navbar.screenfullF') : $t('navbar.screenfull')
         "
-        placement="bottom"
-      >
+                  placement="bottom">
         <div class="top-bar__item">
-          <i
-            style="font-size:20px;font-weight:blod"
-            :class="isFullScren ? 'el-icon-full-screen' : 'el-icon-full-screen'"
-            @click="handleScreen"
-          ></i>
+          <i style="font-size:20px;font-weight:blod"
+             :class="isFullScren ? 'el-icon-full-screen' : 'el-icon-full-screen'"
+             @click="handleScreen"></i>
         </div>
       </el-tooltip>
-      <img
-        class="top-bar__img"
-        style="background:#409EFF;"
-        src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80"
-      />
+      <img class="top-bar__img"
+           style="background:#409EFF;"
+           src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" />
       <el-dropdown>
         <span class="el-dropdown-link">
           {{ userInfo.userName }}
@@ -76,13 +64,13 @@
           <el-dropdown-item>
             <router-link to="/">{{ $t("navbar.dashboard") }}</router-link>
           </el-dropdown-item>
-          <el-dropdown-item>
+          <!-- <el-dropdown-item>
             <router-link to="/info/index">{{
               $t("navbar.userinfo")
             }}</router-link>
-          </el-dropdown-item>
-          <el-dropdown-item @click.native="logout" divided
-            >{{ $t("navbar.logOut") }}
+          </el-dropdown-item> -->
+          <el-dropdown-item @click.native="logout"
+                            divided>{{ $t("navbar.logOut") }}
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -114,14 +102,14 @@ export default {
     // topLang
   },
   name: "top",
-  data() {
+  data () {
     return {
       logoImg: require("@/util/img/logo.png")
     };
   },
   filters: {},
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     listenfullscreen(this.setScreen);
   },
   computed: {
@@ -145,16 +133,16 @@ export default {
     ])
   },
   methods: {
-    handleScreen() {
+    handleScreen () {
       fullscreenToggel();
     },
-    setCollapse() {
+    setCollapse () {
       this.$store.commit("SET_COLLAPSE");
     },
-    setScreen() {
+    setScreen () {
       this.$store.commit("SET_FULLSCREN");
     },
-    logout() {
+    logout () {
       this.$confirm(this.$t("logoutTip"), this.$t("tip"), {
         confirmButtonText: this.$t("submitText"),
         cancelButtonText: this.$t("cancelText"),

@@ -2,7 +2,8 @@
   <basic-container>
     <el-row style="padding-bottom:20px;">
       <el-button icon="el-icon-arrow-left"
-                 type="primary">返回</el-button>
+                 type="primary"
+                 @click="back">返回</el-button>
       <el-button type="warning"
                  v-show="learning"
                  icon="el-icon-edit"
@@ -13,7 +14,7 @@
                  @click="learning = !learning">Learning
       </el-button>
     </el-row>
-    <el-row>
+    <!-- <el-row>
       <el-select v-model="search"
                  filterable
                  placeholder="请选择">
@@ -23,12 +24,11 @@
                    :value="item.id">
         </el-option>
       </el-select>
-    </el-row>
+    </el-row> -->
 
     <el-row v-show="learning"
             :gutter="20">
       <el-col :span="12">
-
         <el-table :data="data"
                   ref="crud"
                   :header-cell-style="styleCss"
@@ -39,11 +39,9 @@
           <el-table-column align="center"
                            label="Words">
             <template>
-
               <div class="listLeft">
-
                 <el-table :data="listLeft"
-                          ref="crud"
+                          ref="left"
                           :show-header="styleCssLeft"
                           highlight-current-row
                           @row-click="btn"
@@ -52,7 +50,7 @@
                           align="left">
                   <el-table-column align="center">
                     <template slot-scope="scope">
-                      <div class="leftItem">{{scope.row.text}}</div>
+                      <div class="leftItem">{{scope.row.name}}</div>
                     </template>
                   </el-table-column>
                 </el-table>
@@ -77,120 +75,40 @@
                        align="center"
                        cellspacing="0"
                        cellpadding="0">
-                  <caption class="tableheader">学生成绩表
+                  <caption class="tableheader">{{leftObj.name}}
                   </caption>
-
                   <tbody style="width：100%">
                     <tr align="center">
-                      <td>小明</td>
-                      <td>89</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小红</td>
-                      <td>96</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
+                      <td>kind</td>
+                      <td>{{leftObj.kind}}</td>
 
                     </tr>
                     <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
+                      <td>phonetic</td>
+                      <td>{{leftObj.phonetic}}</td>
 
                     </tr>
                     <tr align="center">
-                      <td>小明</td>
-                      <td>89</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小红</td>
-                      <td>96</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
+                      <td>zhDesc</td>
+                      <td>{{leftObj.zhDesc}}</td>
 
                     </tr>
                     <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
+                      <td>enDesc</td>
+                      <td>{{leftObj.enDesc}}</td>
 
                     </tr>
                     <tr align="center">
-                      <td>小明</td>
-                      <td>89</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小红</td>
-                      <td>96</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
+                      <td>wordRoot</td>
+                      <td>{{leftObj.wordRoot}}</td>
 
                     </tr>
                     <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                    <tr align="center">
-                      <td>小明</td>
-                      <td>89</td>
+                      <td>example</td>
+                      <td>{{leftObj.example}}</td>
 
                     </tr>
 
-                    <tr align="center">
-                      <td>小红</td>
-                      <td>96</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                    <tr align="center">
-                      <td>小明</td>
-                      <td>89</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小红</td>
-                      <td>96</td>
-
-                    </tr>
-
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
-                    <tr align="center">
-                      <td>小张</td>
-                      <td>54</td>
-
-                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -199,6 +117,8 @@
         </el-table>
       </el-col>
     </el-row>
+
+    <!-- right -->
     <el-row class="top"
             v-show="!learning">
       <div class="item"
@@ -217,127 +137,226 @@
     </el-row>
     <el-row style="min-height:368px;"
             v-show="!learning">
-      <div class="testlist">
-        <diV class="testlistHeader">
-          <h1>这是单词</h1>
-        </diV>
-        <table style="margin-left:250px;">
-          <tbody>
-            <tr>
-              <td>
-                <table class="ans werTable">
-                  <tbody>
-                    <tr>
-                      <td><input style="width:30px;height:30px;border:2px solid #8f8f8f;"
-                               type="checkbox"
-                               onclick="doAnswer(this,false,null,11906)"></td>
-                      <td class="questionTD">开花；发育，成熟；繁荣</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <table class="ans werTable">
-                  <tbody>
-                    <tr>
-                      <td><input style="width:30px;height:30px;border:2px solid #8f8f8f;"
-                               type="checkbox"
-                               onclick="doAnswer(this,true,null,11906)"></td>
-                      <td class="questionTD">g</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <table class="ans werTable">
-                  <tbody>
-                    <tr>
-                      <td><input style="width:30px;height:30px;border:2px solid #8f8f8f;"
-                               type="checkbox"
-                               onclick="doAnswer(this,false,null,11906)"></td>
-                      <td class="questionTD">撒胡椒粉；大量给予</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <table class="ans werTable">
-                  <tbody>
-                    <tr>
-                      <td><input style="width:30px;height:30px;border:2px solid #8f8f8f;"
-                               type="checkbox"
-                               onclick="doAnswer(this,false,null,11906)"></td>
-                      <td class="questionTD">行星</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div v-if="wordItem"
+           class="testlist">
+        <div v-for="(item,i) in wordList"
+             :key="i"
+             v-show="wordIndex == i">
+          <div class="testlistHeader">
+            <h1>{{item.title}}</h1>
+          </diV>
+          <table style="margin-left:250px;">
+            <tbody>
+              <tr>
+                <td>
+                  <table class="ans werTable">
+                    <tbody>
+                      <tr>
+                        <td v-for="(val,index) in item.options"
+                            :key="index">
+                          <input style="width:30px;height:30px;border:2px solid #8f8f8f;"
+                                 type="checkbox"
+                                 @click="doAnswer(item.answer,val.key,index)">
+                        </td>
+                        <td class="questionTD">开花；发育，成熟；繁荣</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div v-else
+           class="testlist">
+        <div class="star">
+          <el-button type="primary"
+                     @click="star">开始</el-button>
+        </div>
+
       </div>
     </el-row>
   </basic-container>
 </template>
 
 <script>
+import { getLearningList } from '@/api/learn'
 export default {
   name: "studyLearning",
   components: {},
   data () {
     return {
-      learning: false,
-      flag: false,
+      learning: true,
+
       data: [1],
       styleCss: {
         color: '#333',
         fontWeight: 700,
         background: '#f5f5f5'
       },
-      listLeft: [
-        { text: '1' },
-        { text: '2' },
-        { text: '3' },
-        { text: '4' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '1' },
-        { text: '2' },
-
-      ],
+      listLeft: [],
       styleCssLeft: false,
+      leftObj: {},
 
-      trueList: [false, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true, false, false, true, true],
-
+      wordList: [],
+      wordItem: null,
+      wordIndex: 0,
+      trueList: [],
       search: ''
     };
   },
+  created () {
+    this.onload()
+  },
   methods: {
+    onload () {
+      setTimeout(() => {
+        let code = this.data[0] + 1
+        this.data = [code]
+        this.listLeft = [
+          {
+            "name": "ceshi1",
+            "wordId": 1,
+            "kind": "kind1",
+            "phonetic": "phonetic",
+            "zhDesc": "zhDesc",
+            "enDesc": "enDesc",
+            "wordRoot": "wordRoot",
+            "example": "example",
+            "fileUrl": "fileUrl"
+          },
+          {
+            "name": "ceshi1",
+            "wordId": 1,
+            "kind": "kind2",
+            "phonetic": "phonetic",
+            "zhDesc": "zhDesc",
+            "enDesc": "enDesc",
+            "wordRoot": "wordRoot",
+            "example": "example",
+            "fileUrl": "fileUrl"
+          },
+          {
+            "name": "ceshi1",
+            "wordId": 1,
+            "kind": "kind3",
+            "phonetic": "phonetic",
+            "zhDesc": "zhDesc",
+            "enDesc": "enDesc",
+            "wordRoot": "wordRoot",
+            "example": "example",
+            "fileUrl": "fileUrl"
+          },
+          {
+            "name": "ceshi1",
+            "wordId": 1,
+            "kind": "kind",
+            "phonetic": "phonetic",
+            "zhDesc": "zhDesc",
+            "enDesc": "enDesc",
+            "wordRoot": "wordRoot",
+            "example": "example",
+            "fileUrl": "fileUrl"
+          },
+          {
+            "name": "ceshi1",
+            "wordId": 1,
+            "kind": "kind",
+            "phonetic": "phonetic",
+            "zhDesc": "zhDesc",
+            "enDesc": "enDesc",
+            "wordRoot": "wordRoot",
+            "example": "example",
+            "fileUrl": "fileUrl"
+          }
+        ]
+        this.leftObj = this.listLeft[0] || {}
+        this.$refs.left.setCurrentRow(this.listLeft[0]);
 
-    btn (row, col, event) {
-      console.log(row)
-      console.log(col)
-      console.log(event)
+
+
+        // 答题list
+        this.wordList = [
+          {
+            "wordId": 1,
+            "type": 1,
+            "title": "word1",
+            "options": [
+              {
+                "key": "A",
+                "value": "你好"
+              },
+            ],
+            "answer": "A"
+          },
+          {
+            "wordId": 1,
+            "type": 1,
+            "title": "word2",
+            "options": [
+              {
+                "key": "A",
+                "value": "你好"
+              },
+            ],
+            "answer": "b"
+          },
+          {
+            "wordId": 1,
+            "type": 1,
+            "title": "word3",
+            "options": [
+              {
+                "key": "A",
+                "value": "你好"
+              },
+            ],
+            "answer": "c"
+          },
+          {
+            "wordId": 1,
+            "type": 1,
+            "title": "word4",
+            "options": [
+              {
+                "key": "A",
+                "value": "你好"
+              },
+            ],
+            "answer": "d"
+          },
+        ]
+      }, 2000)
+
+      // getLearningList().then((res) => {
+
+      // })
+    },
+    btn (row) {
+      let code = this.data[0] + 1
+      this.data = [code]
+      this.leftObj = row
+    },
+    star () {
+      this.wordItem = this.wordList[0]
+    },
+    doAnswer (i1, i2, index) {
+      if (i1 == i2) {
+        this.trueList.push(true)
+      } else {
+        this.trueList.push(false)
+      }
+
+      if (this.trueList.length < this.wordList.length) {
+        this.wordItem = this.wordList[index + 1]
+        this.wordIndex = this.wordIndex + 1
+      }
+    },
+    back () {
+      this.$router.back()
     }
   }
 };
@@ -398,6 +417,13 @@ export default {
     text-align: center;
   }
   .testlistContent {
+  }
+  .star {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
