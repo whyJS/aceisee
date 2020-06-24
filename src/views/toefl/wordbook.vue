@@ -130,7 +130,7 @@ export default {
 
     },
     study () {
-      this.$router.push('/study/wordbook')
+      this.$router.push('/study/word')
     }
   }
 };
